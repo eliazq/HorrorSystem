@@ -4,5 +4,11 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public WeaponHandling WeaponHandling { get; private set; }
+
+    private void Start()
+    {
+        WeaponHandling = GetComponent<WeaponHandling>();
+    }
 
 }
