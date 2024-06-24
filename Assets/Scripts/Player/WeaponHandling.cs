@@ -44,9 +44,13 @@ public class WeaponHandling : MonoBehaviour
         if (HasWeapon)
         {
             if (avatarMask.GetHumanoidBodyPartActive(AvatarMaskBodyPart.RightArm) == true)
+            {
                 avatarMask.SetHumanoidBodyPartActive(AvatarMaskBodyPart.RightArm, false);
                 avatarMask.SetHumanoidBodyPartActive(AvatarMaskBodyPart.RightHandIK, false);
                 avatarMask.SetHumanoidBodyPartActive(AvatarMaskBodyPart.RightFingers, false);
+
+            }
+            handAnimatorIK.enabled = true;
 
             CheckShooting();
 
@@ -59,6 +63,10 @@ public class WeaponHandling : MonoBehaviour
             avatarMask.SetHumanoidBodyPartActive(AvatarMaskBodyPart.RightArm, true);
             avatarMask.SetHumanoidBodyPartActive(AvatarMaskBodyPart.RightHandIK, true);
             avatarMask.SetHumanoidBodyPartActive(AvatarMaskBodyPart.RightFingers, true);
+        }
+        if (!HasWeapon)
+        {
+            handAnimatorIK.enabled = false;
         }
     }
 
@@ -148,6 +156,7 @@ public class WeaponHandling : MonoBehaviour
         WeaponSystem.DropWeapon(Weapon, Camera.main.transform.forward, WeaponThrowForce);
         Weapon = null;
         SetHandIKTarget(null);
+        StartCoroutine(RightHandIKResetAnimator());
     }
 
     private void SetHandIKTarget(Transform target)
