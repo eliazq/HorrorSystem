@@ -1112,7 +1112,7 @@ Transform:
   m_GameObject: {fileID: 346355475}
   serializedVersion: 2
   m_LocalRotation: {x: 0.01649215, y: -0.0076783337, z: 0.00012665319, w: 0.99983454}
-  m_LocalPosition: {x: 0.16301173, y: -0.18, z: 0.426959}
+  m_LocalPosition: {x: 0.163, y: -0.181, z: 0.451}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8030,6 +8030,8 @@ MonoBehaviour:
   handTransform: {fileID: 346355476}
   WeaponThrowForce: 300
   ShotImpactForce: 200
+  handAnimatorIK: {fileID: 1471045358}
+  avatarMask: {fileID: 31900000, guid: 8570138d1b73c304eb93cfb50876c7a2, type: 2}
   twoBoneIKConstraint: {fileID: 2102227690}
   rigBuilder: {fileID: 1471045357}
   emptyHandTransform: {fileID: 1771676255}

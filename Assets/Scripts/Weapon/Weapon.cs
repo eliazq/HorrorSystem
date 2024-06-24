@@ -111,6 +111,12 @@ public class Weapon : MonoBehaviour, IInteractable
         }
 
         weaponHandling.SetWeapon(this);
+        StartCoroutine(BugHotFix(weaponHandling));
+    }
+    private IEnumerator BugHotFix(WeaponHandling weaponHandling)
+    {
+        yield return new WaitForSeconds(0.1f);
+        weaponHandling.SetWeapon(this);
     }
     public string GetInteractText(){
         return "PickUpWeapon";

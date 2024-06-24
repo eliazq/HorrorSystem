@@ -16,6 +16,8 @@ public class WeaponHandling : MonoBehaviour
     [SerializeField] private float ShotImpactForce = 200f;
 
     [Header("Hand IK")]
+    [SerializeField] private Animator handAnimatorIK;
+    [SerializeField] private AvatarMask avatarMask;
     [SerializeField] private TwoBoneIKConstraint twoBoneIKConstraint;
     [SerializeField] private RigBuilder rigBuilder;
     [SerializeField] private Transform emptyHandTransform;
@@ -41,11 +43,22 @@ public class WeaponHandling : MonoBehaviour
     private void HandleWeapon(){
         if (HasWeapon)
         {
+            if (avatarMask.GetHumanoidBodyPartActive(AvatarMaskBodyPart.RightArm) == true)
+                avatarMask.SetHumanoidBodyPartActive(AvatarMaskBodyPart.RightArm, false);
+                avatarMask.SetHumanoidBodyPartActive(AvatarMaskBodyPart.RightHandIK, false);
+                avatarMask.SetHumanoidBodyPartActive(AvatarMaskBodyPart.RightFingers, false);
+
             CheckShooting();
 
             CheckWeaponDrop();
 
             CheckReload(); 
+        }
+        else if (avatarMask.GetHumanoidBodyPartActive(AvatarMaskBodyPart.RightArm) == false)
+        {
+            avatarMask.SetHumanoidBodyPartActive(AvatarMaskBodyPart.RightArm, true);
+            avatarMask.SetHumanoidBodyPartActive(AvatarMaskBodyPart.RightHandIK, true);
+            avatarMask.SetHumanoidBodyPartActive(AvatarMaskBodyPart.RightFingers, true);
         }
     }
 
@@ -120,13 +133,21 @@ public class WeaponHandling : MonoBehaviour
         }
 
         SetHandIKTarget(Weapon.handlerGrip);
-        
+        StartCoroutine(RightHandIKResetAnimator());
+
+    }
+
+    IEnumerator RightHandIKResetAnimator()
+    {
+        handAnimatorIK.enabled = false;
+        yield return new WaitForSeconds(0.1f);
+        handAnimatorIK.enabled = true;
     }
 
     private void DropWeapon(){
         WeaponSystem.DropWeapon(Weapon, Camera.main.transform.forward, WeaponThrowForce);
         Weapon = null;
-        SetHandIKTarget(emptyHandTransform);
+        SetHandIKTarget(null);
     }
 
     private void SetHandIKTarget(Transform target)
