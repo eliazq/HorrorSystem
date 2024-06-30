@@ -20,7 +20,6 @@
 <h3>3. Sound Manager</h3>
 <ul>
     <li><strong>Sound Management</strong>: Simplifies the process of adding and managing sounds in your game.</li>
-    <li><strong>Audio Effects</strong>: Includes ambient sounds, character sounds, and interactive object sounds.</li>
 </ul>
 
 <h3>4. Item System</h3>
