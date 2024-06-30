@@ -124,4 +124,4 @@
     <li>GitHub: <a href="https://github.com/eliazq">eliazq</a></li>
 </ul>
 
-<p>Thank you for using the Horror System! We hope it helps you create an amazing horror game.</p>
+<p>Enjoy The Horror System</p>
