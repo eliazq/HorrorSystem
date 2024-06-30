@@ -261,6 +261,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3310653567166922453}
     m_Modifications:
+    - target: {fileID: 227890744835382291, guid: e643dd6f5c9009c49afc29384b63e68b, type: 3}
+      propertyPath: m_Materials.Array.data[7]
+      value: 
+      objectReference: {fileID: 2100000, guid: f4fd760e81f35cb41adafe921a7ae7c2, type: 2}
     - target: {fileID: 7289050748840707993, guid: e643dd6f5c9009c49afc29384b63e68b, type: 3}
       propertyPath: m_Name
       value: Glock-Visual

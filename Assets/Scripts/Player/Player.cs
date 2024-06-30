@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public WeaponHandling WeaponHandling { get; private set; }
+    public Weapon Weapon { get { return WeaponHandling.Weapon; } }
 
     private void Start()
     {

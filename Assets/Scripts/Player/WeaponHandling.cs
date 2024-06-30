@@ -1,11 +1,8 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using NaughtyAttributes;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
-using UnityEngine.InputSystem;
 
 public class WeaponHandling : MonoBehaviour
 {
@@ -35,20 +32,16 @@ public class WeaponHandling : MonoBehaviour
     }
 
     private void Update() {
-
         HandleWeapon();
-
     }
 
     private void HandleWeapon(){
+        // Has weapon
         if (HasWeapon)
         {
-            if (avatarMask.GetHumanoidBodyPartActive(AvatarMaskBodyPart.RightArm) == true)
+            if (IsRightHandAvatarMaskActive())
             {
-                avatarMask.SetHumanoidBodyPartActive(AvatarMaskBodyPart.RightArm, false);
-                avatarMask.SetHumanoidBodyPartActive(AvatarMaskBodyPart.RightHandIK, false);
-                avatarMask.SetHumanoidBodyPartActive(AvatarMaskBodyPart.RightFingers, false);
-
+                SetRightHandAvatarMaskActive(false);
             }
             handAnimatorIK.enabled = true;
 
@@ -58,14 +51,9 @@ public class WeaponHandling : MonoBehaviour
 
             CheckReload(); 
         }
-        else if (avatarMask.GetHumanoidBodyPartActive(AvatarMaskBodyPart.RightArm) == false)
+        else if (!IsRightHandAvatarMaskActive())
         {
-            avatarMask.SetHumanoidBodyPartActive(AvatarMaskBodyPart.RightArm, true);
-            avatarMask.SetHumanoidBodyPartActive(AvatarMaskBodyPart.RightHandIK, true);
-            avatarMask.SetHumanoidBodyPartActive(AvatarMaskBodyPart.RightFingers, true);
-        }
-        if (!HasWeapon)
-        {
+            SetRightHandAvatarMaskActive(true);
             handAnimatorIK.enabled = false;
         }
     }
@@ -197,6 +185,27 @@ public class WeaponHandling : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
+    }
+
+    private void SetRightHandAvatarMaskActive(bool active)
+    {
+        if (active)
+        {
+            avatarMask.SetHumanoidBodyPartActive(AvatarMaskBodyPart.RightArm, true);
+            avatarMask.SetHumanoidBodyPartActive(AvatarMaskBodyPart.RightHandIK, true);
+            avatarMask.SetHumanoidBodyPartActive(AvatarMaskBodyPart.RightFingers, true);
+        }
+        else
+        {
+            avatarMask.SetHumanoidBodyPartActive(AvatarMaskBodyPart.RightArm, false);
+            avatarMask.SetHumanoidBodyPartActive(AvatarMaskBodyPart.RightHandIK, false);
+            avatarMask.SetHumanoidBodyPartActive(AvatarMaskBodyPart.RightFingers, false);
+        }
+    }
+
+    private bool IsRightHandAvatarMaskActive()
+    {
+        return avatarMask.GetHumanoidBodyPartActive(AvatarMaskBodyPart.RightArm);
     }
 
 

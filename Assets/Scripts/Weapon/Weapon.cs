@@ -5,11 +5,18 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour, IInteractable
 {
+    [Header("Data")]
+    [SerializeField] private WeaponData weaponData;
+
+    [Header("References")]
     [SerializeField] private Transform shootingPoint;
     [SerializeField] private Animator animator;
     [SerializeField] private Transform handlerTransform;
+
+    [Header("Audio")]
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip shootingClip;
+
     private WeaponHandling weaponHandling;
     
     // Animation triggers
@@ -29,7 +36,6 @@ public class Weapon : MonoBehaviour, IInteractable
             shootingPoint = value;
         }
     }
-    [SerializeField] private WeaponData weaponData;
     public WeaponData Data
     {
         get{
@@ -39,14 +45,12 @@ public class Weapon : MonoBehaviour, IInteractable
             weaponData = value;
         }
     }
-
     public bool IsPlayerWeapon {
         get{
             if (this == weaponHandling.Weapon) return true;
             return false;
         }
     }
-
     public Transform handlerGrip
     {
         get { return handlerTransform; }
@@ -111,11 +115,13 @@ public class Weapon : MonoBehaviour, IInteractable
         }
 
         weaponHandling.SetWeapon(this);
-        StartCoroutine(BugHotFix(weaponHandling));
+        StartCoroutine(SetWeaponFix(weaponHandling));
     }
-    private IEnumerator BugHotFix(WeaponHandling weaponHandling)
+
+    // Setting the IK Target twice fix its bug where it sets it wrong
+    private IEnumerator SetWeaponFix(WeaponHandling weaponHandling)
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForEndOfFrame();
         weaponHandling.SetWeapon(this);
     }
     public string GetInteractText(){
