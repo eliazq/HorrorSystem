@@ -8,9 +8,8 @@ public class WeaponSystem : MonoBehaviour
     public static WeaponSystem Instance;
 
     [Header("Shooting Data")]
-    [SerializeField] string groundLayerName = "Ground";
+    [SerializeField] LayerImpactList layerImpactList;
     [SerializeField] GameObject trailPrefab;
-    [SerializeField] GameObject impactEffect;
     [SerializeField] float impactDestroyTime = 50f;
     [SerializeField] float trailTime = 0.15f;
     [SerializeField] float impactForce = 250f;
@@ -44,10 +43,14 @@ public class WeaponSystem : MonoBehaviour
         
         if (Physics.Raycast(shootingPosition, shootDirection, out RaycastHit hit, shotDistance))
         {
-            if (hit.collider.gameObject.layer.Equals(LayerMask.NameToLayer(groundLayerName)))
+            foreach(LayerImpactPair pair in layerImpactList.layerImpactPairs)
             {
-                SpawnBulletImpact(impactEffect, hit.point, Quaternion.LookRotation(hit.normal), impactDestroyTime);
+                if (hit.collider.gameObject.layer.Equals(LayerMask.NameToLayer(pair.layer)))
+                {
+                    SpawnBulletImpact(pair.impactEffect, hit.point, Quaternion.LookRotation(hit.normal), impactDestroyTime);
+                }   
             }
+            
             ShootBulletTrail(trailPrefab, trailStartPoint, hit.point, trailTime);
             if (hit.transform.TryGetComponent(out Rigidbody rigidbody))
             {
@@ -68,9 +71,12 @@ public class WeaponSystem : MonoBehaviour
 
         if (Physics.Raycast(shootingPosition, shootDirection, out RaycastHit hit, shotDistance))
         {
-            if (hit.collider.gameObject.layer.Equals(LayerMask.NameToLayer(groundLayerName)))
+            foreach (LayerImpactPair pair in layerImpactList.layerImpactPairs)
             {
-                SpawnBulletImpact(impactEffect, hit.point, Quaternion.LookRotation(hit.normal), impactDestroyTime);
+                if (hit.collider.gameObject.layer.Equals(LayerMask.NameToLayer(pair.layer)))
+                {
+                    SpawnBulletImpact(pair.impactEffect, hit.point, Quaternion.LookRotation(hit.normal), impactDestroyTime);
+                }
             }
             ShootBulletTrail(trailPrefab, trailStartPoint, hit.point, trailTime);
             if (hit.transform.TryGetComponent(out Rigidbody rigidbody))
@@ -93,9 +99,12 @@ public class WeaponSystem : MonoBehaviour
         if (Physics.Raycast(shootingPosition, shootDirection, out RaycastHit hitInfo, shotDistance))
         {
             hit = hitInfo;
-            if (hitInfo.collider.gameObject.layer.Equals(LayerMask.NameToLayer(groundLayerName)))
+            foreach (LayerImpactPair pair in layerImpactList.layerImpactPairs)
             {
-                SpawnBulletImpact(impactEffect, hitInfo.point, Quaternion.LookRotation(hitInfo.normal), impactDestroyTime);
+                if (hit.collider.gameObject.layer.Equals(LayerMask.NameToLayer(pair.layer)))
+                {
+                    SpawnBulletImpact(pair.impactEffect, hit.point, Quaternion.LookRotation(hit.normal), impactDestroyTime);
+                }
             }
             ShootBulletTrail(trailPrefab, trailStartPoint, hitInfo.point, trailTime);
             if (hitInfo.transform.TryGetComponent(out Rigidbody rigidbody))

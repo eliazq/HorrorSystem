@@ -27,6 +27,7 @@ public class Weapon : MonoBehaviour, IInteractable
     public int magSize{ get; private set; }
 
     public bool isReloading {get; private set;}
+    public event EventHandler OnAiming;
     public Transform ShootingPoint
     {
         get{
@@ -74,6 +75,7 @@ public class Weapon : MonoBehaviour, IInteractable
         if (Input.GetKey(KeyCode.Mouse1))
         {
             animator.SetBool(AimBool, true);
+            OnAiming?.Invoke(this, EventArgs.Empty);
         }
         else
         {

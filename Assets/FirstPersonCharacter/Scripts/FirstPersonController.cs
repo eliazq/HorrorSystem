@@ -214,8 +214,8 @@ public class FirstPersonController : MonoBehaviour
     {
         if (IsGrounded)
         {
-            IsTurningLeft = mouseX < -0.9f;
-            IsTurningRight = mouseX > 0.9f;
+            IsTurningLeft = mouseX < -0.3f;
+            IsTurningRight = mouseX > 0.3f;
         }
         else
         {

@@ -7,6 +7,9 @@ using UnityEngine.Animations.Rigging;
 public class WeaponHandling : MonoBehaviour
 {
     public Weapon Weapon {get; private set;}
+
+    public event EventHandler OnBodyHit;
+
     [Header("Settings")]
     [SerializeField] private Transform handTransform;
     [SerializeField] private float WeaponThrowForce = 300f;
@@ -64,11 +67,11 @@ public class WeaponHandling : MonoBehaviour
             shootingCooldown = Time.time + 1f/Weapon.Data.fireRate;
             OnShoot?.Invoke(this, EventArgs.Empty);
 
-            if (WeaponSystem.Instance.Shoot(Weapon.ShootingPoint.position, Weapon.ShootingPoint.forward,
+            if (WeaponSystem.Instance.Shoot(Camera.main.transform.position, Camera.main.transform.forward,
                 transform.position, Weapon.ShootingPoint.position, Weapon.Data.shootingDistance, ShotImpactForce, out RaycastHit hit))
                 {
-                    // TODO: Damage Logic Here, IDamageable.Damage
-                     
+                    // Damage Logic Here, IDamageable.Damage !!!
+                    OnBodyHit?.Invoke(this, EventArgs.Empty);
                 }
             
         }

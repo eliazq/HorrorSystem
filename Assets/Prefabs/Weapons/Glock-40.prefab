@@ -80,12 +80,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a771dd260bcfef949a873120826355f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponData: {fileID: 11400000, guid: bbe920da787b8944c9716dc2a7133fad, type: 2}
   shootingPoint: {fileID: 3252102357112699307}
   animator: {fileID: 7828551710828089427}
   handlerTransform: {fileID: 925053446509104998}
   audioSource: {fileID: 7366337073910441272}
   shootingClip: {fileID: 8300000, guid: 9fb67e381b571414b99959d66d9cde84, type: 3}
-  weaponData: {fileID: 11400000, guid: bbe920da787b8944c9716dc2a7133fad, type: 2}
 --- !u!136 &4351865087013751682
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -169,7 +169,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.198
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -265,6 +265,42 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[7]
       value: 
       objectReference: {fileID: 2100000, guid: f4fd760e81f35cb41adafe921a7ae7c2, type: 2}
+    - target: {fileID: 1359221733536140733, guid: e643dd6f5c9009c49afc29384b63e68b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 1359221733536140733, guid: e643dd6f5c9009c49afc29384b63e68b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.0032
+      objectReference: {fileID: 0}
+    - target: {fileID: 1359221733536140733, guid: e643dd6f5c9009c49afc29384b63e68b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.5163871
+      objectReference: {fileID: 0}
+    - target: {fileID: 1359221733536140733, guid: e643dd6f5c9009c49afc29384b63e68b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.51966304
+      objectReference: {fileID: 0}
+    - target: {fileID: 1359221733536140733, guid: e643dd6f5c9009c49afc29384b63e68b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.48305738
+      objectReference: {fileID: 0}
+    - target: {fileID: 1359221733536140733, guid: e643dd6f5c9009c49afc29384b63e68b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.47953138
+      objectReference: {fileID: 0}
+    - target: {fileID: 1359221733536140733, guid: e643dd6f5c9009c49afc29384b63e68b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -4.21
+      objectReference: {fileID: 0}
+    - target: {fileID: 1359221733536140733, guid: e643dd6f5c9009c49afc29384b63e68b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90.39
+      objectReference: {fileID: 0}
+    - target: {fileID: 1359221733536140733, guid: e643dd6f5c9009c49afc29384b63e68b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 90
+      objectReference: {fileID: 0}
     - target: {fileID: 7289050748840707993, guid: e643dd6f5c9009c49afc29384b63e68b, type: 3}
       propertyPath: m_Name
       value: Glock-Visual

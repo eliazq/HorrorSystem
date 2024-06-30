@@ -50,12 +50,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a771dd260bcfef949a873120826355f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponData: {fileID: 11400000, guid: 1789c96e972f6034fad8ed35deb96d55, type: 2}
   shootingPoint: {fileID: 3605267606820579127}
   animator: {fileID: 7310021018742163777}
   handlerTransform: {fileID: 3522211651541592346}
   audioSource: {fileID: 2045890370849629766}
   shootingClip: {fileID: 8300000, guid: 9fb67e381b571414b99959d66d9cde84, type: 3}
-  weaponData: {fileID: 11400000, guid: 1789c96e972f6034fad8ed35deb96d55, type: 2}
 --- !u!65 &2819678232906572196
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -162,7 +162,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.198
   m_Pitch: 1
   Loop: 0
   Mute: 0
