@@ -123,7 +123,7 @@ public class Weapon : MonoBehaviour, IInteractable
     // Setting the IK Target twice fix its bug where it sets it wrong
     private IEnumerator SetWeaponFix(WeaponHandling weaponHandling)
     {
-        yield return new WaitForEndOfFrame();
+        yield return new WaitForSeconds(0.05f);
         weaponHandling.SetWeapon(this);
     }
     public string GetInteractText(){
