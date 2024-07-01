@@ -28,6 +28,7 @@ public class Weapon : MonoBehaviour, IInteractable
 
     public bool isReloading {get; private set;}
     public event EventHandler OnAiming;
+
     public Transform ShootingPoint
     {
         get{

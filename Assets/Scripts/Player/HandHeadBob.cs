@@ -54,6 +54,7 @@ public class HandHeadBob : MonoBehaviour
             firstPersonController = GetComponentInParent<FirstPersonController>();
         breathingMovementCenter = StartPos;
         GetNewBreathingTargetPosition();
+        SetWalkingHeadBobSettings();
     }
 
     void Update()
