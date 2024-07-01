@@ -72,7 +72,7 @@ public class Weapon : MonoBehaviour, IInteractable
             else animator.SetBool(OutOfAmmoBool, false);
         }
 
-        if (Input.GetKey(KeyCode.Mouse1))
+        if (weaponHandling.IsAiming)
         {
             animator.SetBool(AimBool, true);
             OnAiming?.Invoke(this, EventArgs.Empty);

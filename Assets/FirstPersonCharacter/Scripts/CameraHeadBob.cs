@@ -10,19 +10,21 @@ public class CameraHeadBob : MonoBehaviour
     [Range(1f, 30f)]
     [SerializeField] private float Frequency = 10.0f; // Walk: 10 / Running: 20
 
-    [Range(10f, 100f)]
+    [Range(0f, 100f)]
     [SerializeField] private float Smooth = 10.0f; // Walk: 15 / Running: 20
 
     [SerializeField] private float LeanAmount = 1.8f;
     [SerializeField] private float LeanTime = 3f;
 
     Vector3 StartPos;
+    Quaternion StartRot;
     [SerializeField] FirstPersonController firstPersonController;
     bool isWalkingSettings = true;
 
     void Start()
     {
         StartPos = transform.localPosition;
+        StartRot = transform.localRotation;
 
         if (firstPersonController == null) 
             firstPersonController = GetComponentInParent<FirstPersonController>();
@@ -60,7 +62,11 @@ public class CameraHeadBob : MonoBehaviour
             // Lean backwards -x
             targetRotation = Quaternion.Euler(-LeanAmount, transform.localEulerAngles.y, transform.localEulerAngles.z);
         }
-        transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRotation, LeanTime * Time.deltaTime);
+        else
+        {
+            transform.localRotation = Quaternion.LerpUnclamped(transform.localRotation, StartRot, LeanTime * Time.deltaTime);
+        }
+        transform.localRotation = Quaternion.LerpUnclamped(transform.localRotation, targetRotation, LeanTime * Time.deltaTime);
     }
 
     private void CheckForHeadbobTrigger()
@@ -97,8 +103,8 @@ public class CameraHeadBob : MonoBehaviour
     {
 
         Vector3 pos = Vector3.zero;
-        pos.y += Mathf.Lerp(pos.y, Mathf.Sin(Time.time * Frequency) * Amount * 1.4f, Smooth * Time.deltaTime);
-        pos.x += Mathf.Lerp(pos.x, Mathf.Cos(Time.time * Frequency / 2f) * Amount * 1.6f, Smooth * Time.deltaTime);
+        pos.y += Mathf.LerpUnclamped(pos.y, Mathf.Sin(Time.time * Frequency) * Amount * 1.4f, Smooth * Time.deltaTime);
+        pos.x += Mathf.LerpUnclamped(pos.x, Mathf.Cos(Time.time * Frequency / 2f) * Amount * 1.6f, Smooth * Time.deltaTime);
         transform.localPosition += pos;
         return pos;
     }
@@ -106,6 +112,6 @@ public class CameraHeadBob : MonoBehaviour
     private void StopHeadbob()
     {
         if (transform.localPosition == StartPos) return;
-        transform.localPosition = Vector3.Lerp(transform.localPosition, StartPos, 1 * Time.deltaTime);
+        transform.localPosition = Vector3.LerpUnclamped(transform.localPosition, StartPos, 1 * Time.deltaTime);
     }
 }

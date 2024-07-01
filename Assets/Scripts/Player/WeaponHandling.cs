@@ -10,6 +10,9 @@ public class WeaponHandling : MonoBehaviour
 
     public event EventHandler OnBodyHit;
 
+    [Header("References")]
+    [SerializeField] private FirstPersonController firstPersonController;
+
     [Header("Settings")]
     [SerializeField] private Transform handTransform;
     [SerializeField] private float WeaponThrowForce = 300f;
@@ -33,7 +36,17 @@ public class WeaponHandling : MonoBehaviour
             return Weapon != null;
         }
     }
-
+    public bool IsAiming
+    {
+        get
+        {
+            return firstPersonController.IsAiming;
+        }
+    }
+    private void Start()
+    {
+        firstPersonController = GetComponent<FirstPersonController>();
+    }
     private void Update() {
         HandleWeapon();
     }

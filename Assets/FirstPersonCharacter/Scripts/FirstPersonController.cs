@@ -61,11 +61,17 @@ public class FirstPersonController : MonoBehaviour
         }
     }
     public bool IsLanding { get; private set; }
-    public bool IsStanding { get { return transform.localScale.y > oldYScale - 0.01f; } }
+    public bool IsStanding { get { return velocity.x < 0.1 && velocity.z < 0.1f && IsGrounded; } }
     float oldYRotation;
     public bool IsTurningLeft { get; private set;}
     public bool IsTurningRight { get; private set;}
     public bool IsCrouching { get; private set; }
+    public bool IsAiming {
+        get { 
+            if (Input.GetMouseButton(1)) return true;
+            else return false;
+        } 
+    }
 
     [Header("Settings Gravity")]
     [SerializeField] private float gravity = -9.81f;
@@ -153,17 +159,6 @@ public class FirstPersonController : MonoBehaviour
                 jumpUp = !jumpWithMovement
             });
             velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
-        }
-
-        // Crouch
-        if (Input.GetKey(KeyCode.LeftControl) && IsGrounded)
-        {
-            IsCrouching = true;
-            ScalePlayerToCrouchHeight();
-        }
-        else if(!IsStanding) // still a bit crouched
-        {
-            ScalePlayerToStandingHeight();
         }
 
     }
