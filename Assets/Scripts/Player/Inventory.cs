@@ -2,23 +2,49 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using NaughtyAttributes;
 
 public class Inventory : MonoBehaviour
 {
     [SerializeField] private const int size = 8;
     List<Item> items = new List<Item>(size);
 
-    bool isDropItemOnCooldown = false;
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            Item itemToDrop = items[items.Count - 1];
+            DropItem(itemToDrop);
+        }
+    }
 
     public void AddItem(Item item)
     {
         if (!CanAddItem(item)) return;
-
+        // If item thats stackable already in inventory, add to that item stack, forexamle: 5x coin
+        if (item.Data.stackable)
+        {
+            if (TryAddToItemStack(item)) return;
+        }
+        
+        // Add item to inventory
         items.Add(item);
         item.transform.SetParent(transform);
         item.transform.localPosition = Vector3.zero;
         item.gameObject.SetActive(false);
+    }
+
+    private bool TryAddToItemStack(Item item)
+    {
+        foreach (Item i in items)
+        {
+            if (i.Data.itemName == item.Data.itemName)
+            {
+                i.Amount++;
+                Destroy(item.gameObject);
+                return true;
+            }
+        }
+        return false;
     }
 
     private bool CanAddItem(Item item)
@@ -51,27 +77,32 @@ public class Inventory : MonoBehaviour
 
     public void DropItem(Item item)
     {
-        if (isDropItemOnCooldown) return;
-
+        bool removeItemFromList = true;
+        if (item.Amount > 1)
+        {
+            item.Amount--;
+            Vector3 itemDropPos = item.transform.position;
+            item = Instantiate(item);
+            item.transform.position = itemDropPos;
+            removeItemFromList = false;
+        }
         item.transform.SetParent(null);
         item.gameObject.SetActive(true);
         if (item.GetComponent<Rigidbody>() == null)
             item.AddComponent<Rigidbody>();
         DisablePhysicsFromObject(item.gameObject, 3f);
-        items.Remove(item);
+        if (removeItemFromList)
+            items.Remove(item);
     }
 
     private void DisablePhysicsFromObject(GameObject gameObject, float waitTime)
     {
-        if (!isDropItemOnCooldown)
-            StartCoroutine(DisablePhysicsFromObjectEnumerator(waitTime, gameObject));
+        StartCoroutine(DisablePhysicsFromObjectEnumerator(waitTime, gameObject));
     }
     IEnumerator DisablePhysicsFromObjectEnumerator(float waitTime, GameObject gameObject)
     {
-        isDropItemOnCooldown = true;
         yield return new WaitForSeconds(waitTime);
         Destroy(gameObject.GetComponent<Rigidbody>());
-        isDropItemOnCooldown = false;
     }
 
 }

@@ -311,6 +311,50 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4956397359936895974}
   m_Enabled: 1
+--- !u!1 &6572152303474928988
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8728199792745926211}
+  - component: {fileID: 6000979954200169920}
+  m_Layer: 7
+  m_Name: Inventory
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8728199792745926211
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6572152303474928988}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 655064570098639361}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6000979954200169920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6572152303474928988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec7d0d00de825674aa3a95b6d725ad03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6866968260120609243
 GameObject:
   m_ObjectHideFlags: 0
@@ -347,6 +391,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 8728199792745926211}
   - {fileID: 6442275240820431542}
   - {fileID: 556031339873591696}
   m_Father: {fileID: 0}
@@ -418,6 +463,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a928369284541ef408bb1c6c38795b69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventory: {fileID: 6000979954200169920}
 --- !u!114 &7191160807959969133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -458,6 +504,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9d6d5f4e34888844b6bb63e105eb671, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  firstPersonController: {fileID: 0}
   handTransform: {fileID: 1735030261909837482}
   WeaponThrowForce: 300
   ShotImpactForce: 200
@@ -479,6 +526,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitMarkUI: {fileID: 0}
+  crosshair: {fileID: 0}
+  CrosshairFadeTime: 0.3
   HitmarkShowingTime: 0.1
 --- !u!1 &8884919459696868176
 GameObject:

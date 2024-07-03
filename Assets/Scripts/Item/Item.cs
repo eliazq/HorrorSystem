@@ -5,6 +5,8 @@ using UnityEngine;
 public abstract class Item : MonoBehaviour, IInteractable
 {
     [SerializeField] internal ItemSO Data;
+    private int amount = 1;
+    public int Amount { get { return amount; } set { amount = value; } }
     [SerializeField] internal string interactText;
    
     public string GetInteractText()

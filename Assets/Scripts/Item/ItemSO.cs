@@ -8,6 +8,5 @@ public class ItemSO : ScriptableObject
     public Sprite itemIcon;
     public bool stackable = false;
     public string itemName;
-    public int amount;
 
 }
