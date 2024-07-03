@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -5,6 +6,7 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
+    public event EventHandler OnInventoryChanged;
     [SerializeField] private const int size = 8;
     List<Item> items = new List<Item>(size);
 
@@ -31,6 +33,7 @@ public class Inventory : MonoBehaviour
         item.transform.SetParent(transform);
         item.transform.localPosition = Vector3.zero;
         item.gameObject.SetActive(false);
+        OnInventoryChanged?.Invoke(this, EventArgs.Empty);
     }
 
     private bool TryAddToItemStack(Item item)
@@ -41,6 +44,7 @@ public class Inventory : MonoBehaviour
             {
                 i.Amount++;
                 Destroy(item.gameObject);
+                OnInventoryChanged?.Invoke(this, EventArgs.Empty);
                 return true;
             }
         }
