@@ -6,10 +6,10 @@ public class Key : Item
 {
     private void Start()
     {
-        interactText = $"Pick up {itemData.itemName}";
+        interactText = $"Pick up {Data.name}";
     }
     public override void OnInteract(Transform interactorTransform)
     {
-        Debug.Log(interactorTransform);
+        interactorTransform.GetComponent<Inventory>().AddItem(this);
     }
 }

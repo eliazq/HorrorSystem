@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class Item : MonoBehaviour, IInteractable
 {
-    [SerializeField] internal ItemSO itemData;
+    [SerializeField] internal ItemSO Data;
     [SerializeField] internal string interactText;
 
     public string GetInteractText()
