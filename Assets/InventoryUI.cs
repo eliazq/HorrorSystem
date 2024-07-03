@@ -5,11 +5,14 @@ using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour
 {
+    Inventory inventory;
     [SerializeField] private GameObject itemSlothParent;
-    private List<GameObject> itemSloths;
+    [SerializeField] private Sprite emptyInventoryIcon;
+    private List<GameObject> itemSloths = new List<GameObject>();
 
     private void Start()
     {
+        inventory = GetComponent<Inventory>();
         for (int i = 0; i < itemSlothParent.transform.childCount; i++)
         {
             itemSloths.Add(itemSlothParent.transform.GetChild(i).gameObject);
@@ -25,9 +28,13 @@ public class InventoryUI : MonoBehaviour
 
     private void UpdateInventoryUI()
     {
-        foreach (GameObject itemSlot in itemSloths)
+        foreach (GameObject item in itemSloths)
         {
-            //itemSlot.transform.GetChild(0).GetComponent<Image>().;
+            item.transform.GetChild(0).GetComponent<Image>().sprite = emptyInventoryIcon;
+        }
+        for (int i = 0; i <= inventory.ItemCount() - 1; i++)
+        {
+            itemSloths[i].transform.GetChild(0).GetComponent<Image>().sprite = inventory.GetItem(i).Data.itemIcon;
         }
     }
 }

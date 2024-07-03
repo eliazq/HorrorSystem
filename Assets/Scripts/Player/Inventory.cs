@@ -7,7 +7,7 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     public event EventHandler OnInventoryChanged;
-    [SerializeField] private const int size = 8;
+    private const int size = 8;
     List<Item> items = new List<Item>(size);
 
     private void Update()
@@ -17,6 +17,11 @@ public class Inventory : MonoBehaviour
             Item itemToDrop = items[items.Count - 1];
             DropItem(itemToDrop);
         }
+    }
+
+    public int ItemCount()
+    {
+        return items.Count;
     }
 
     public void AddItem(Item item)
@@ -79,6 +84,12 @@ public class Inventory : MonoBehaviour
         return null;
     }
 
+    public Item GetItem(int index)
+    {
+        if (items.Count - 1 < index) { Debug.LogError("Tried to access item with too long index"); return null; }
+        return items[index];
+    }
+
     public void DropItem(Item item)
     {
         bool removeItemFromList = true;
@@ -97,6 +108,7 @@ public class Inventory : MonoBehaviour
         DisablePhysicsFromObject(item.gameObject, 3f);
         if (removeItemFromList)
             items.Remove(item);
+        OnInventoryChanged?.Invoke(this, EventArgs.Empty);
     }
 
     private void DisablePhysicsFromObject(GameObject gameObject, float waitTime)
