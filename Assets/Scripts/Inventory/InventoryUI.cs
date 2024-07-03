@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class InventoryUI : MonoBehaviour
 {
     Inventory inventory;
+    [SerializeField] private GameObject inventoryUI;
     [SerializeField] private GameObject itemSlothParent;
     [SerializeField] private Sprite emptyInventoryIcon;
     private List<GameObject> itemSloths = new List<GameObject>();
@@ -24,6 +25,11 @@ public class InventoryUI : MonoBehaviour
     private void InventoryUI_OnInventoryChanged(object sender, System.EventArgs e)
     {
         UpdateInventoryUI();        
+    }
+
+    public void ToggleInventory()
+    {
+        inventoryUI.SetActive(!inventoryUI.activeSelf);
     }
 
     private void UpdateInventoryUI()

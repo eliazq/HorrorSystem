@@ -185,6 +185,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8547669905886798044, guid: 7e5969c250a4aae4e9b81a12e6534e70, type: 3}
   m_PrefabInstance: {fileID: 838524940}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &329174683 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1097982084710848791, guid: 7e5969c250a4aae4e9b81a12e6534e70, type: 3}
+  m_PrefabInstance: {fileID: 838524940}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &418784835
 GameObject:
   m_ObjectHideFlags: 0
@@ -712,6 +717,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfab0f139a174214da178867bb732ffa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventoryUI: {fileID: 329174683}
   itemSlothParent: {fileID: 315557692}
   emptyInventoryIcon: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
 --- !u!1001 &1945043872
