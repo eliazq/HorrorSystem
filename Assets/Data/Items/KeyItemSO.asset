@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd99fadec1ae07a42b92306dfb20866e, type: 3}
   m_Name: KeyItemSO
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 21300000, guid: a01087ce1455c7e4c8f2410c26afcfd2, type: 3}
+  itemIcon: {fileID: 21300000, guid: b471615681557494a933e7071fa39614, type: 3}
   stackable: 0
   itemName: Hall Key
