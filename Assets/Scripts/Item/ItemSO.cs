@@ -7,7 +7,7 @@ public class ItemSO : ScriptableObject
 {
     public Sprite itemIcon;
     public bool stackable = false;
-    public new string name;
+    public string itemName;
     public int amount;
 
 }

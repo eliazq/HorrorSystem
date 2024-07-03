@@ -6,7 +6,7 @@ public abstract class Item : MonoBehaviour, IInteractable
 {
     [SerializeField] internal ItemSO Data;
     [SerializeField] internal string interactText;
-
+   
     public string GetInteractText()
     {
         return interactText;
