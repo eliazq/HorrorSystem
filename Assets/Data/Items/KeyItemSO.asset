@@ -13,6 +13,5 @@ MonoBehaviour:
   m_Name: KeyItemSO
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 21300000, guid: a01087ce1455c7e4c8f2410c26afcfd2, type: 3}
-  stackable: 1
+  stackable: 0
   itemName: Hall Key
-  amount: 1
