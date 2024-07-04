@@ -1,22 +1,35 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour
 {
     Inventory inventory;
     [SerializeField] private GameObject inventoryUI;
     [SerializeField] private GameObject itemSlothParent;
-    [SerializeField] private Sprite emptyInventoryIcon;
-    private List<GameObject> itemSloths = new List<GameObject>();
+    [SerializeField] public static Sprite emptyInventoryIcon;
+    private List<ItemSlot> itemSloths = new List<ItemSlot>();
 
     private void Start()
     {
         inventory = GetComponent<Inventory>();
         for (int i = 0; i < itemSlothParent.transform.childCount; i++)
         {
-            itemSloths.Add(itemSlothParent.transform.GetChild(i).gameObject);
+            itemSloths.Add(itemSlothParent.transform.GetChild(i).GetComponent<ItemSlot>());
+        }
+
+        foreach (ItemSlot itemSlot in itemSloths)
+        {
+            // Use a local variable to capture the current itemSlot correctly
+            ItemSlot currentSlot = itemSlot;
+            currentSlot.removeButton.onClick.AddListener(() =>
+            {
+                if (!currentSlot.hasItem)
+                {
+                    return;
+                }
+                inventory.DropItem(currentSlot.item);
+                currentSlot.ClearItem();
+            });
         }
 
         GetComponent<Inventory>().OnInventoryChanged += InventoryUI_OnInventoryChanged;
@@ -30,17 +43,22 @@ public class InventoryUI : MonoBehaviour
     public void ToggleInventory()
     {
         inventoryUI.SetActive(!inventoryUI.activeSelf);
+        Cursor.lockState = inventoryUI.activeSelf ? CursorLockMode.None : CursorLockMode.Locked;
+        Cursor.visible = inventoryUI.activeSelf;
     }
 
     private void UpdateInventoryUI()
     {
-        foreach (GameObject item in itemSloths)
+        for (int i = 0; i < itemSloths.Count; i++)
         {
-            item.transform.GetChild(0).GetComponent<Image>().sprite = emptyInventoryIcon;
-        }
-        for (int i = 0; i <= inventory.ItemCount() - 1; i++)
-        {
-            itemSloths[i].transform.GetChild(0).GetComponent<Image>().sprite = inventory.GetItem(i).Data.itemIcon;
+            if (inventory.ItemCount() > i)
+            {
+                itemSloths[i].item = inventory.GetItem(i);
+            }
+            else if (itemSloths[i].hasItem)
+            {
+                itemSloths[i].ClearItem();
+            }
         }
     }
 }
