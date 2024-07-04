@@ -17,21 +17,6 @@ public class InventoryUI : MonoBehaviour
             itemSloths.Add(itemSlothParent.transform.GetChild(i).GetComponent<ItemSlot>());
         }
 
-        foreach (ItemSlot itemSlot in itemSloths)
-        {
-            // Use a local variable to capture the current itemSlot correctly
-            ItemSlot currentSlot = itemSlot;
-            currentSlot.removeButton.onClick.AddListener(() =>
-            {
-                if (!currentSlot.hasItem)
-                {
-                    return;
-                }
-                inventory.DropItem(currentSlot.item);
-                currentSlot.ClearItem();
-            });
-        }
-
         GetComponent<Inventory>().OnInventoryChanged += InventoryUI_OnInventoryChanged;
     }
 
@@ -51,13 +36,14 @@ public class InventoryUI : MonoBehaviour
     {
         for (int i = 0; i < itemSloths.Count; i++)
         {
-            if (inventory.ItemCount() > i)
+            ItemSlot itemSlot = itemSloths[i];
+            if (inventory.TryGetItem(i, out Item item))
             {
-                itemSloths[i].item = inventory.GetItem(i);
+                itemSlot.item = item;
             }
-            else if (itemSloths[i].hasItem)
+            else
             {
-                itemSloths[i].ClearItem();
+                itemSlot.ClearItem();
             }
         }
     }

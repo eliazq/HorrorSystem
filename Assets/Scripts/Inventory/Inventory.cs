@@ -94,6 +94,17 @@ public class Inventory : MonoBehaviour
         return items[index];
     }
 
+    public bool TryGetItem(int index, out Item outItem)
+    {
+        if (items.Count - 1 < index) 
+        {
+            outItem = null;
+            return false;
+        }
+        outItem = items[index];
+        return true;
+    }
+
     public void DropItem(Item item)
     {
         bool removeItemFromList = true;

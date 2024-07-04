@@ -28,6 +28,11 @@ public class ItemSlot : MonoBehaviour
         if (itemRemoveButton != null) removeButton = itemRemoveButton;
         if (itemIcon == null) itemIcon = transform.GetChild(0).GetComponent<Image>();
         if (removeButton == null) removeButton = transform.GetChild(1).GetComponent<Button>();
+
+        itemRemoveButton.onClick.AddListener(() =>
+        {
+            Player.Instance.Inventory.DropItem(slotItem);
+        });
     }
 
     public void ClearItem()

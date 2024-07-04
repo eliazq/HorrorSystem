@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public static Player Instance;
     public WeaponHandling WeaponHandling { get; private set; }
     public Weapon Weapon { get { return WeaponHandling.Weapon; } }
 
@@ -14,6 +15,15 @@ public class Player : MonoBehaviour
     {
         WeaponHandling = GetComponent<WeaponHandling>();
         Inventory = inventory;
+        
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else if (Instance != this)
+        {
+            Destroy(gameObject);
+        }
     }
 
 }
