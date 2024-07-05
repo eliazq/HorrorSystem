@@ -128,7 +128,8 @@ public class Inventory : MonoBehaviour
     IEnumerator DisablePhysicsFromObjectEnumerator(float waitTime, GameObject gameObject)
     {
         yield return new WaitForSeconds(waitTime);
-        Destroy(gameObject.GetComponent<Rigidbody>());
+        if (gameObject != null && gameObject.TryGetComponent(out Rigidbody rb))
+            Destroy(rb);
     }
 
 }

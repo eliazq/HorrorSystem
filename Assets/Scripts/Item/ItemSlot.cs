@@ -34,7 +34,8 @@ public class ItemSlot : MonoBehaviour
 
         itemRemoveButton.onClick.AddListener(() =>
         {
-            Player.Instance.Inventory.DropItem(slotItem);
+            if (hasItem)
+                Player.Instance.Inventory.DropItem(slotItem);
         });
     }
 
