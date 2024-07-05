@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ItemSlot : MonoBehaviour
 {
+    [SerializeField] private TextMeshProUGUI itemAmountText;
     [SerializeField] private Image itemIcon;
     Item slotItem;
     [SerializeField] private Button itemRemoveButton;
@@ -18,6 +20,7 @@ public class ItemSlot : MonoBehaviour
         {
             slotItem = value;
             itemIcon.sprite = slotItem.Data.itemIcon;
+            itemAmountText.text = slotItem.Amount.ToString();
         }
     }
 
@@ -39,5 +42,6 @@ public class ItemSlot : MonoBehaviour
     {
         slotItem = null;
         itemIcon.sprite = InventoryUI.emptyInventoryIcon;
+        itemAmountText.text = "0";
     }
 }
