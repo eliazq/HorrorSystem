@@ -12,11 +12,6 @@ public class Inventory : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            Item itemToDrop = items[items.Count - 1];
-            DropItem(itemToDrop);
-        }
         if (Input.GetKeyDown(KeyCode.I))
         {
             GetComponent<InventoryUI>().ToggleInventory();

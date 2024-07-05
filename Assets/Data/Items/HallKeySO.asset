@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd99fadec1ae07a42b92306dfb20866e, type: 3}
-  m_Name: KeyItemSO
+  m_Name: HallKeySO
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 21300000, guid: b471615681557494a933e7071fa39614, type: 3}
-  stackable: 1
+  stackable: 0
   itemName: Hall Key
