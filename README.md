@@ -116,12 +116,4 @@
     </li>
 </ol>
 
-<h2>Contact</h2>
-
-<p>If you have any questions, feel free to reach out:</p>
-<ul>
-    <li>Email: <a href="mailto:heijarielias@gmail.com">heijarielias@gmail.com</a></li>
-    <li>GitHub: <a href="https://github.com/eliazq">eliazq</a></li>
-</ul>
-
 <p>Enjoy The Horror System</p>
