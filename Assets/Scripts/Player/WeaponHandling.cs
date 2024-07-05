@@ -82,10 +82,10 @@ public class WeaponHandling : MonoBehaviour
 
             if (WeaponSystem.Instance.Shoot(Camera.main.transform.position, Weapon.ShootingPoint.forward,
                 transform.position, Weapon.ShootingPoint.position, Weapon.Data.shootingDistance, ShotImpactForce, out RaycastHit hit))
-                {
-                    // Damage Logic Here, IDamageable.Damage !!!
-                    OnBodyHit?.Invoke(this, EventArgs.Empty);
-                }
+            {
+                // Damage Logic Here, IDamageable.Damage !!!
+                OnBodyHit?.Invoke(this, EventArgs.Empty);
+            }
             
         }
     }
@@ -107,17 +107,20 @@ public class WeaponHandling : MonoBehaviour
     private void ReloadWithRightMag(){
         if (Weapon.Data.weaponType == WeaponData.WeaponType.Pistol)
         {
-            if (pistolMags > 0 && Weapon.magSize < Weapon.Data.maxMagSize){
-            pistolMags -= 1;
-            Weapon.Reload();
+            if (!Player.Instance.Inventory.TryGetItem("Pistol Ammo", out Item pistolAmmo)) return;
+            
+            if (pistolAmmo.Amount > 0 && Weapon.magSize < Weapon.Data.maxMagSize){
+                Weapon.Reload(pistolAmmo.GetComponent<Ammo>());
             }
+
         }
+        /* TODO: SUPPORT SUB GUNS
         else if (Weapon.Data.weaponType == WeaponData.WeaponType.SubMachine){
             if (subMachineMags > 0 && Weapon.magSize < Weapon.Data.maxMagSize){
             subMachineMags -= 1;
             Weapon.Reload();
             }
-        }
+        }*/
     }
 
     public void SetWeapon(Weapon weapon){

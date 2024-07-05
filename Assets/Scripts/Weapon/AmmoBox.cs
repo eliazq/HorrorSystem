@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class AmmoBox : MonoBehaviour, IInteractable
 {
-    [SerializeField] private WeaponData.WeaponType ammoType;
+    [SerializeField] private Ammo ammo;
+    [SerializeField] private int ammoAmount = 16;
 
     public string GetInteractText()
     {
-        return ammoType.ToString() + " ammo";
+        return "Pick up " + ammo.Data.itemName;
     }
 
     public Transform GetTransform()
@@ -18,13 +19,11 @@ public class AmmoBox : MonoBehaviour, IInteractable
 
     public void Interact(Transform interactorTransform)
     {
-        switch(ammoType){
-            case WeaponData.WeaponType.Pistol:
-                interactorTransform.GetComponent<WeaponHandling>().pistolMags += 1;
-                break;
-            case WeaponData.WeaponType.SubMachine:
-                interactorTransform.GetComponent<WeaponHandling>().subMachineMags += 1;
-                break;
+        for (int i = 0; i < ammoAmount; i++)
+        {
+            Item ammoItem = Instantiate(ammo);
+            ammoItem.transform.position = Player.Instance.transform.position;
+            Player.Instance.Inventory.AddItem(ammoItem);
         }
         Destroy(gameObject);
     }

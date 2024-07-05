@@ -70,11 +70,11 @@ public class Inventory : MonoBehaviour
         return true;
     }
 
-    public Item GetItem(string name)
+    public Item GetItem(string itemName)
     {
         foreach (Item item in items)
         {
-            if (item.Data.name == name)
+            if (item.Data.itemName == itemName)
             {
                 return item;
             }
@@ -98,6 +98,36 @@ public class Inventory : MonoBehaviour
         }
         outItem = items[index];
         return true;
+    }
+
+    public bool TryGetItem(string itemName, out Item outItem)
+    {
+        foreach (Item item in items)
+        {
+            if (item.Data.itemName == itemName)
+            {
+                outItem = item;
+                return true;
+            }
+        }
+        outItem = null;
+        return false;
+    }
+
+    public void DestroyItem(Item item)
+    {
+        bool removeItemFromList = true;
+        if (item.Amount > 1)
+        {
+            item.Amount--;
+            removeItemFromList = false;
+        }
+        if (removeItemFromList)
+        {
+            items.Remove(item);
+            Destroy(item);
+        }
+        OnInventoryChanged?.Invoke(this, EventArgs.Empty);
     }
 
     public void DropItem(Item item)

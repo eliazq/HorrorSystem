@@ -28,6 +28,7 @@ public class Weapon : MonoBehaviour, IInteractable
 
     public bool isReloading {get; private set;}
     public event EventHandler OnAiming;
+    private Ammo realoadWeaponAmmo;
 
     public Transform ShootingPoint
     {
@@ -63,7 +64,13 @@ public class Weapon : MonoBehaviour, IInteractable
 
         if (isReloading && !animator.GetCurrentAnimatorStateInfo(0).IsTag("Reload")){
             // Just stopped reload animation
-            magSize = Data.maxMagSize;
+            int oldMagSize = magSize;
+            magSize += realoadWeaponAmmo.Amount;
+            if (magSize > Data.maxMagSize) magSize = Data.maxMagSize;
+            for (int i = 0; i < weaponData.maxMagSize - oldMagSize; i++)
+            {
+                Player.Instance.Inventory.DestroyItem(realoadWeaponAmmo);
+            }
             isReloading = false;
         }
 
@@ -95,9 +102,10 @@ public class Weapon : MonoBehaviour, IInteractable
         }
     }
 
-    public void Reload(){
+    public void Reload(Ammo reloadingWeaponsAmmo){
         if (!isReloading)
         {
+            realoadWeaponAmmo = reloadingWeaponsAmmo;
             animator.SetTrigger(ReloadTrigger);
             StartCoroutine(SetReload());
         }
