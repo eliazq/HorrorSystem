@@ -7,6 +7,10 @@ public class AmmoBox : MonoBehaviour, IInteractable
     [SerializeField] private Ammo ammo;
     [SerializeField] private int ammoAmount = 16;
 
+    private void Start()
+    {
+        ammo.Data.itemName = ammo.AmmoType.ToString() + " Ammo";
+    }
     public string GetInteractText()
     {
         return "Pick up " + ammo.Data.itemName;
