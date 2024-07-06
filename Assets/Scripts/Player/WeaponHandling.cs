@@ -105,22 +105,11 @@ public class WeaponHandling : MonoBehaviour
     }
 
     private void ReloadWithRightMag(){
-        if (Weapon.Data.weaponType == WeaponData.WeaponType.Pistol)
-        {
-            if (!Player.Instance.Inventory.TryGetItem("Pistol Ammo", out Item pistolAmmo)) return;
-            
-            if (pistolAmmo.Amount > 0 && Weapon.magSize < Weapon.Data.maxMagSize){
-                Weapon.Reload(pistolAmmo.GetComponent<Ammo>());
-            }
-
+        if (!Player.Instance.Inventory.TryGetItem(Weapon.Data.weaponType.ToString() + " Ammo", out Item ammo)) return;
+        
+        if (ammo.Amount > 0 && Weapon.magSize < Weapon.Data.maxMagSize){
+            Weapon.Reload(ammo.GetComponent<Ammo>());
         }
-        /* TODO: SUPPORT SUB GUNS
-        else if (Weapon.Data.weaponType == WeaponData.WeaponType.SubMachine){
-            if (subMachineMags > 0 && Weapon.magSize < Weapon.Data.maxMagSize){
-            subMachineMags -= 1;
-            Weapon.Reload();
-            }
-        }*/
     }
 
     public void SetWeapon(Weapon weapon){

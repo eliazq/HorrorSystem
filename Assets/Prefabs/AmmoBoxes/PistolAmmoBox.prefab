@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5314119612069588741}
   - component: {fileID: 5699832431882676668}
   m_Layer: 0
-  m_Name: AmmoBox
+  m_Name: PistolAmmoBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -68,7 +68,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ammo: {fileID: 6991370324103368282, guid: 01f3fc7c52e11f247a8f4cc56a0ad497, type: 3}
-  ammoAmount: 16
+  ammoAmount: 17
 --- !u!1 &6938167056752929062
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3bb38a140c07a542a61bdd1f8219c56, type: 3}
-  m_Name: MP7Data
+  m_Script: {fileID: 11500000, guid: dd99fadec1ae07a42b92306dfb20866e, type: 3}
+  m_Name: SubmachineAmmoSO
   m_EditorClassIdentifier: 
-  fireRate: 6
-  shootingDistance: 70
-  maxMagSize: 20
-  weaponType: 1
+  itemIcon: {fileID: 21300000, guid: 4cd1aadcc39518643805827377c29e84, type: 3}
+  stackable: 1
+  itemName: Submachine Ammo

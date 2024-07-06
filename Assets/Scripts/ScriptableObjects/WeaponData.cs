@@ -11,7 +11,7 @@ public class WeaponData : ScriptableObject
     public WeaponType weaponType;
     public enum WeaponType{
         Pistol,
-        SubMachine
+        Submachine
     }
 
 }
