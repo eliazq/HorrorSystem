@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 21300000, guid: 516b71c61f123974cb65517684d1665d, type: 3}
   stackable: 1
-  itemName: Pistol Ammo
+  itemName: 
