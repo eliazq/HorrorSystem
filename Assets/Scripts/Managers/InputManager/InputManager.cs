@@ -41,8 +41,23 @@ public class InputManager : MonoBehaviour
     public event EventHandler OnReloadHolded;
     public event EventHandler OnWeaponDropClicked;
     public event EventHandler OnInventoryToggle;
+    public event EventHandler OnAcceptClicked;
+    public event EventHandler<OnArrowClickedEventArgs> OnArrowClicked;
+    public class OnArrowClickedEventArgs : EventArgs
+    {
+        public ArrowKey arrowKey;
+    }
+    public enum ArrowKey
+    {
+        Left,
+        Right,
+        Up,
+        Down,
+        None,
+    }
     public Vector2 movementInput { get; private set; }
     public Vector2 lookInput { get; private set; }
+    public Vector2 arrowInput { get; private set; }
     public bool sprintPressed { get { return playerInputActions.Movement.Sprint.IsPressed(); } }
     public bool jumpPressed { get { return playerInputActions.Movement.Jump.IsPressed(); } }
     public bool aimPressed { get { return playerInputActions.WeaponHandling.Aim.IsPressed(); } }
@@ -71,6 +86,8 @@ public class InputManager : MonoBehaviour
 
             playerInputActions.Movement.Look.performed += i => lookInput = i.ReadValue<Vector2>();
 
+            playerInputActions.UI.Arrows.started += Arrows_started;
+
             playerInputActions.Interaction.Interact.started += Interact_started;
 
             playerInputActions.WeaponHandling.Reload.started += Reload_started;
@@ -79,8 +96,41 @@ public class InputManager : MonoBehaviour
 
             playerInputActions.Inventory.ToggleInventory.started += ToggleInventory_started;
 
+            playerInputActions.UI.Accept.started += Accept_started;
+
         }
         playerInputActions.Enable();
+    }
+
+    private void Arrows_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        arrowInput = obj.ReadValue<Vector2>();
+        ArrowKey clickedArrowKey = ArrowKey.None;
+        switch (arrowInput.x)
+        {
+            case > 0:
+                clickedArrowKey = ArrowKey.Right;
+                break;
+            case < 0:
+                clickedArrowKey = ArrowKey.Left;
+                break;
+        }
+        switch (arrowInput.y)
+        {
+            case > 0:
+                clickedArrowKey = ArrowKey.Up;
+                break;
+            case < 0:
+                clickedArrowKey = ArrowKey.Down;
+                break;
+        }
+        OnArrowClicked?.Invoke(this, new OnArrowClickedEventArgs {arrowKey = clickedArrowKey});
+            
+    }
+
+    private void Accept_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnAcceptClicked?.Invoke(this, EventArgs.Empty);
     }
 
     private void ToggleInventory_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)

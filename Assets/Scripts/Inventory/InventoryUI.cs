@@ -1,29 +1,77 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class InventoryUI : MonoBehaviour
 {
     Inventory inventory;
     [SerializeField] private GameObject inventoryUI;
-    [SerializeField] private GameObject itemSlothParent;
+    [SerializeField] private GameObject itemSlotParent;
     [SerializeField] public static Sprite emptyInventoryIcon;
-    private List<ItemSlot> itemSloths = new List<ItemSlot>();
+    private List<ItemSlot> itemSlots = new List<ItemSlot>();
+    public bool isVisible { get { return inventoryUI.activeSelf; } }
+    [SerializeField] private GameObject selectedItemSlot;
+    private GameObject SelectedItemSlot
+    {
+        get
+        {
+            return selectedItemSlot;
+        }
+        set
+        {
+            if (selectedItemSlot != null) selectedItemSlot.GetComponent<ItemSlot>().HideSelectedVisual();
+            selectedItemSlot = value;
+            selectedItemSlot.GetComponent<ItemSlot>().ShowSelectedVisual();
+        }
+    }
+
+    private int currentIndex = 0;
 
     private void Start()
     {
         inventory = GetComponent<Inventory>();
-        for (int i = 0; i < itemSlothParent.transform.childCount; i++)
+        for (int i = 0; i < itemSlotParent.transform.childCount; i++)
         {
-            itemSloths.Add(itemSlothParent.transform.GetChild(i).GetComponent<ItemSlot>());
+            itemSlots.Add(itemSlotParent.transform.GetChild(i).GetComponent<ItemSlot>());
         }
 
         GetComponent<Inventory>().OnInventoryChanged += InventoryUI_OnInventoryChanged;
         InputManager.Instance.OnInventoryToggle += Instance_OnInventoryToggle;
+        InputManager.Instance.OnAcceptClicked += Instance_OnAcceptClicked;
+        InputManager.Instance.OnArrowClicked += Instance_OnArrowClicked;
+    }
+
+    private void Instance_OnArrowClicked(object sender, InputManager.OnArrowClickedEventArgs e)
+    {
+        switch (e.arrowKey)
+        {
+            case InputManager.ArrowKey.Left:
+                SelectPreviousItem();
+                break;
+            case InputManager.ArrowKey.Right:
+                SelectNextItem();
+                break;
+            case InputManager.ArrowKey.Up:
+                break;
+            case InputManager.ArrowKey.Down:
+                break;
+        }
+    }
+
+    private void Instance_OnAcceptClicked(object sender, System.EventArgs e)
+    {
+        if (!isVisible) return; // Inventory not visible
+        // TODO: Select itemSlot
     }
 
     private void Instance_OnInventoryToggle(object sender, System.EventArgs e)
     {
         ToggleInventory();
+        if (isVisible)
+        {
+            EventSystem.current.SetSelectedGameObject(itemSlots[currentIndex].gameObject);
+            SelectedItemSlot = EventSystem.current.currentSelectedGameObject;
+        }
     }
 
     private void InventoryUI_OnInventoryChanged(object sender, System.EventArgs e)
@@ -40,9 +88,9 @@ public class InventoryUI : MonoBehaviour
 
     private void UpdateInventoryUI()
     {
-        for (int i = 0; i < itemSloths.Count; i++)
+        for (int i = 0; i < itemSlots.Count; i++)
         {
-            ItemSlot itemSlot = itemSloths[i];
+            ItemSlot itemSlot = itemSlots[i];
             if (inventory.TryGetItem(i, out Item item))
             {
                 itemSlot.item = item;
@@ -52,5 +100,19 @@ public class InventoryUI : MonoBehaviour
                 itemSlot.ClearItem();
             }
         }
+    }
+
+    public void SelectNextItem()
+    {
+        currentIndex = (currentIndex + 1) % itemSlots.Count;
+        EventSystem.current.SetSelectedGameObject(itemSlots[currentIndex].gameObject);
+        SelectedItemSlot = EventSystem.current.currentSelectedGameObject;
+    }
+
+    public void SelectPreviousItem()
+    {
+        currentIndex = (currentIndex - 1 + itemSlots.Count) % itemSlots.Count;
+        EventSystem.current.SetSelectedGameObject(itemSlots[currentIndex].gameObject);
+        SelectedItemSlot = EventSystem.current.currentSelectedGameObject;
     }
 }

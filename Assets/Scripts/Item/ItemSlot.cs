@@ -10,6 +10,7 @@ public class ItemSlot : MonoBehaviour
     [SerializeField] private Image itemIcon;
     Item slotItem;
     [SerializeField] private Button itemRemoveButton;
+    [SerializeField] private GameObject selectedVisual;
     public Button removeButton { get; private set; }
     public Item item { 
         get
@@ -44,5 +45,14 @@ public class ItemSlot : MonoBehaviour
         slotItem = null;
         itemIcon.sprite = InventoryUI.emptyInventoryIcon;
         itemAmountText.text = "0";
+    }
+
+    public void HideSelectedVisual()
+    {
+        selectedVisual.SetActive(false);
+    }
+    public void ShowSelectedVisual()
+    {
+        selectedVisual.SetActive(true);
     }
 }
