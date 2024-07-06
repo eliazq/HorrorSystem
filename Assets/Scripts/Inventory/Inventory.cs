@@ -10,14 +10,6 @@ public class Inventory : MonoBehaviour
     private const int size = 8;
     List<Item> items = new List<Item>(size);
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            GetComponent<InventoryUI>().ToggleInventory();
-        }
-    }
-
     public int ItemCount()
     {
         return items.Count;

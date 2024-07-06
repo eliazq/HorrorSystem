@@ -40,13 +40,33 @@ public class WeaponHandling : MonoBehaviour
     {
         get
         {
-            return firstPersonController.IsAiming;
+            return InputManager.Instance.aimPressed;
         }
     }
     private void Start()
     {
         firstPersonController = GetComponent<FirstPersonController>();
+        InputManager.Instance.OnReloadHolded += Instance_OnReloadHolded;
+        InputManager.Instance.OnWeaponDropClicked += Instance_OnWeaponDropClicked;
     }
+
+    private void Instance_OnWeaponDropClicked(object sender, EventArgs e)
+    {
+        if (HasWeapon && Time.time >= dropWeaponCooldown && !Weapon.isReloading)
+        {
+            dropWeaponCooldown = Time.time + 1f/weaponThrowRate;
+            DropWeapon(); 
+        }
+    }
+
+    private void Instance_OnReloadHolded(object sender, EventArgs e)
+    {
+        if (HasWeapon)
+        {
+            ReloadWithRightMag();
+        }
+    }
+
     private void Update() {
         HandleWeapon();
     }
@@ -63,9 +83,6 @@ public class WeaponHandling : MonoBehaviour
 
             CheckShooting();
 
-            CheckWeaponDrop();
-
-            CheckReload(); 
         }
         else if (!IsRightHandAvatarMaskActive())
         {
@@ -76,7 +93,7 @@ public class WeaponHandling : MonoBehaviour
 
     private void CheckShooting(){
         // Check if player shoots and if its possible
-        if (Input.GetKey(KeyCode.Mouse0) && Time.time >= shootingCooldown && Weapon.magSize > 0 && !Weapon.isReloading){
+        if (InputManager.Instance.shootPressed && Time.time >= shootingCooldown && Weapon.magSize > 0 && !Weapon.isReloading){
             shootingCooldown = Time.time + 1f/Weapon.Data.fireRate;
             OnShoot?.Invoke(this, EventArgs.Empty);
 
@@ -87,20 +104,6 @@ public class WeaponHandling : MonoBehaviour
                 OnBodyHit?.Invoke(this, EventArgs.Empty);
             }
             
-        }
-    }
-
-    private void CheckWeaponDrop(){
-        if (Input.GetKey(KeyCode.G) && Time.time >= dropWeaponCooldown && !Weapon.isReloading){
-            dropWeaponCooldown = Time.time + 1f/weaponThrowRate;
-            DropWeapon(); 
-        }
-    }
-
-    private void CheckReload(){
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            ReloadWithRightMag();
         }
     }
 

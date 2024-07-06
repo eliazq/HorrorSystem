@@ -18,6 +18,12 @@ public class InventoryUI : MonoBehaviour
         }
 
         GetComponent<Inventory>().OnInventoryChanged += InventoryUI_OnInventoryChanged;
+        InputManager.Instance.OnInventoryToggle += Instance_OnInventoryToggle;
+    }
+
+    private void Instance_OnInventoryToggle(object sender, System.EventArgs e)
+    {
+        ToggleInventory();
     }
 
     private void InventoryUI_OnInventoryChanged(object sender, System.EventArgs e)

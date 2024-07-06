@@ -75,7 +75,7 @@ public class HandHeadBob : MonoBehaviour
 
     private void BreathingHeadBob()
     {
-        if (firstPersonController.IsAiming)
+        if (Player.Instance.WeaponHandling.IsAiming)
         {
             MoveTowardsBreathingTarget();
         }

@@ -20,7 +20,9 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
 
     [Header("Settings Camera")]
-    [SerializeField] private float mouseSensitivity = 800f;
+    [SerializeField] private float mouseSensitivity = 300f;
+    [SerializeField] private float lookMouseSensitivity = 300f;
+    [SerializeField] private float aimMouseSensitivity = 100f;
     [SerializeField] private float maxLookUp = -69;
     [SerializeField] private float maxLookDown = 69;
     [SerializeField] private float runningFovAmount = 5f;
@@ -66,12 +68,6 @@ public class FirstPersonController : MonoBehaviour
     public bool IsTurningLeft { get; private set;}
     public bool IsTurningRight { get; private set;}
     public bool IsCrouching { get; private set; }
-    public bool IsAiming {
-        get { 
-            if (Input.GetMouseButton(1)) return true;
-            else return false;
-        } 
-    }
 
     [Header("Settings Gravity")]
     [SerializeField] private float gravity = -9.81f;
@@ -81,6 +77,7 @@ public class FirstPersonController : MonoBehaviour
 
     private void Start()
     {
+        mouseSensitivity = lookMouseSensitivity;
         // If camera not set, try get it from tag MainCamera
         if (playerCamera == null) playerCamera = Camera.main;
 
@@ -113,15 +110,15 @@ public class FirstPersonController : MonoBehaviour
     private void Movement()
     {
         // Inputs
-        float x = Input.GetAxisRaw("Horizontal");
-        float z = Input.GetAxisRaw("Vertical");
+        float x = InputManager.Instance.movementInput.x;
+        float z = InputManager.Instance.movementInput.y;
 
         Vector3 moveDirection = (transform.right * x + transform.forward * z).normalized;
 
         MoveDirection = new Vector3(x, velocity.y, z);
 
         // Running
-        if (Input.GetKey(KeyCode.LeftShift) && z >= 0)
+        if (InputManager.Instance.sprintPressed && z >= 0)
         {
             movementSpeed = runningSpeed;
         }
@@ -149,7 +146,7 @@ public class FirstPersonController : MonoBehaviour
 
         jumpTimer += Time.deltaTime;
         // Jump
-        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded && jumpTimer >= jumpCooldown)
+        if (InputManager.Instance.jumpPressed && IsGrounded && jumpTimer >= jumpCooldown)
         {
             jumpTimer = 0;
             bool jumpWithMovement = lastMoveDirection != Vector3.zero;
@@ -188,9 +185,11 @@ public class FirstPersonController : MonoBehaviour
 
     private void CameraLook()
     {
+        // Sensitivity
+        mouseSensitivity = Player.Instance.WeaponHandling.IsAiming ? aimMouseSensitivity : lookMouseSensitivity;
         // Inputs
-        float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * mouseSensitivity;
-        float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * mouseSensitivity;
+        float mouseX = InputManager.Instance.lookInput.x * Time.deltaTime * mouseSensitivity;
+        float mouseY = InputManager.Instance.lookInput.y * Time.deltaTime * mouseSensitivity;
 
         CheckTurning(mouseX);
 

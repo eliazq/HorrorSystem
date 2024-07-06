@@ -4,13 +4,31 @@ using UnityEngine;
 
 public class PlayerInteract : MonoBehaviour {
 
+    private void Start()
+    {
+        InputManager.Instance.OnInteractionHolded += Instance_OnInteractionHolded;
+        InputManager.Instance.OnInteractionClicked += Instance_OnInteractionClicked;
+    }
+
+    private void Instance_OnInteractionClicked(object sender, System.EventArgs e)
+    {
+        IInteractable interactable = GetInteractableObject();
+        if (interactable != null && interactable.GetTransform().GetComponent<Weapon>() == null) {
+            interactable.Interact(transform);
+        }
+    }
+
+    private void Instance_OnInteractionHolded(object sender, System.EventArgs e)
+    {
+        IInteractable interactable = GetInteractableObject();
+        if (interactable != null && interactable.GetTransform().GetComponent<Weapon>() != null) {
+            interactable.Interact(transform);
+        }
+    }
 
     private void Update() {
         if (Input.GetKeyDown(KeyCode.E)) {
-            IInteractable interactable = GetInteractableObject();
-            if (interactable != null) {
-                interactable.Interact(transform);
-            }
+
         }
     }
 
