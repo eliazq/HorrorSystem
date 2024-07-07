@@ -42,6 +42,7 @@ public class InputManager : MonoBehaviour
     public event EventHandler OnWeaponDropClicked;
     public event EventHandler OnInventoryToggle;
     public event EventHandler OnAcceptClicked;
+    public event EventHandler OnCancelClicked;
     public event EventHandler<OnArrowClickedEventArgs> OnArrowClicked;
     public class OnArrowClickedEventArgs : EventArgs
     {
@@ -98,8 +99,15 @@ public class InputManager : MonoBehaviour
 
             playerInputActions.UI.Accept.started += Accept_started;
 
+            playerInputActions.UI.Delete.started += Delete_started;
+
         }
         playerInputActions.Enable();
+    }
+
+    private void Delete_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnCancelClicked?.Invoke(this, EventArgs.Empty);
     }
 
     private void Arrows_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)

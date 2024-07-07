@@ -223,7 +223,7 @@ public class FirstPersonController : MonoBehaviour
     {
         runningFov = walkingFov + runningFovAmount;
         // if running or falling
-        if (IsRunning || velocity.y < 0.1f && !IsGrounded)
+        if (IsRunning)
         {
             playerCamera.fieldOfView = Mathf.MoveTowards(playerCamera.fieldOfView, runningFov, timeToRunningFov * Time.deltaTime);
         }

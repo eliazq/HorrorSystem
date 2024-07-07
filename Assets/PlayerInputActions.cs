@@ -593,6 +593,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Delete"",
+                    ""type"": ""Button"",
+                    ""id"": ""6ef155d3-905e-4de2-b76b-ce740c85863a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -738,6 +747,28 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Arrows"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""500008d8-193c-4d63-a681-3e5b62a514ac"",
+                    ""path"": ""<Keyboard>/g"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Delete"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b12306c0-83bf-45fc-a0c1-0e03b902f6a4"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Delete"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -767,6 +798,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Accept = m_UI.FindAction("Accept", throwIfNotFound: true);
         m_UI_Arrows = m_UI.FindAction("Arrows", throwIfNotFound: true);
+        m_UI_Delete = m_UI.FindAction("Delete", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1070,12 +1102,14 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
     private readonly InputAction m_UI_Accept;
     private readonly InputAction m_UI_Arrows;
+    private readonly InputAction m_UI_Delete;
     public struct UIActions
     {
         private @PlayerInputActions m_Wrapper;
         public UIActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Accept => m_Wrapper.m_UI_Accept;
         public InputAction @Arrows => m_Wrapper.m_UI_Arrows;
+        public InputAction @Delete => m_Wrapper.m_UI_Delete;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1091,6 +1125,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Arrows.started += instance.OnArrows;
             @Arrows.performed += instance.OnArrows;
             @Arrows.canceled += instance.OnArrows;
+            @Delete.started += instance.OnDelete;
+            @Delete.performed += instance.OnDelete;
+            @Delete.canceled += instance.OnDelete;
         }
 
         private void UnregisterCallbacks(IUIActions instance)
@@ -1101,6 +1138,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Arrows.started -= instance.OnArrows;
             @Arrows.performed -= instance.OnArrows;
             @Arrows.canceled -= instance.OnArrows;
+            @Delete.started -= instance.OnDelete;
+            @Delete.performed -= instance.OnDelete;
+            @Delete.canceled -= instance.OnDelete;
         }
 
         public void RemoveCallbacks(IUIActions instance)
@@ -1145,5 +1185,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     {
         void OnAccept(InputAction.CallbackContext context);
         void OnArrows(InputAction.CallbackContext context);
+        void OnDelete(InputAction.CallbackContext context);
     }
 }

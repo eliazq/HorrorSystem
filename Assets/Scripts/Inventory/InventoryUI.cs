@@ -39,6 +39,17 @@ public class InventoryUI : MonoBehaviour
         InputManager.Instance.OnInventoryToggle += Instance_OnInventoryToggle;
         InputManager.Instance.OnAcceptClicked += Instance_OnAcceptClicked;
         InputManager.Instance.OnArrowClicked += Instance_OnArrowClicked;
+        InputManager.Instance.OnCancelClicked += Instance_OnCancelClicked;
+    }
+
+    private void Instance_OnCancelClicked(object sender, System.EventArgs e)
+    {
+        if (!isVisible) return;
+
+        if (SelectedItemSlot.TryGetComponent(out ItemSlot itemSlot) && itemSlot.hasItem)
+        {
+            Player.Instance.Inventory.DropItem(itemSlot.item);
+        }
     }
 
     private void Instance_OnArrowClicked(object sender, InputManager.OnArrowClickedEventArgs e)
