@@ -11,6 +11,7 @@ public class ItemSlot : MonoBehaviour
     Item slotItem;
     [SerializeField] private Button itemRemoveButton;
     [SerializeField] private GameObject selectedVisual;
+    public Sprite itemSprite { get { return itemIcon.sprite; } }
     public Button removeButton { get; private set; }
     public Item item { 
         get

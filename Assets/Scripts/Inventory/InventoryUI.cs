@@ -40,6 +40,8 @@ public class InventoryUI : MonoBehaviour
         InputManager.Instance.OnAcceptClicked += Instance_OnAcceptClicked;
         InputManager.Instance.OnArrowClicked += Instance_OnArrowClicked;
         InputManager.Instance.OnCancelClicked += Instance_OnCancelClicked;
+
+        emptyInventoryIcon = itemSlots[0].itemSprite;
     }
 
     private void Instance_OnCancelClicked(object sender, System.EventArgs e)
