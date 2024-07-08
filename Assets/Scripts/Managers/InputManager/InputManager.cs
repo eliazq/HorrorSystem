@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
@@ -36,6 +37,8 @@ public class InputManager : MonoBehaviour
         }
     }
 
+    public event EventHandler OnUsingDeviceChanged;
+
     public event EventHandler OnInteractionHolded;
     public event EventHandler OnInteractionClicked;
     public event EventHandler OnReloadHolded;
@@ -59,14 +62,27 @@ public class InputManager : MonoBehaviour
     public Vector2 movementInput { get; private set; }
     public Vector2 lookInput { get; private set; }
     public Vector2 arrowInput { get; private set; }
-    public bool sprintPressed { get { return playerInputActions.Movement.Sprint.IsPressed(); } }
-    public bool jumpPressed { get { return playerInputActions.Movement.Jump.IsPressed(); } }
-    public bool aimPressed { get { return playerInputActions.WeaponHandling.Aim.IsPressed(); } }
-    public bool shootPressed { get { return playerInputActions.WeaponHandling.Shoot.IsPressed(); } }
+    public bool sprintPressed { get { return playerInputActions.Movement.Sprint.IsPressed() && PlayerMovementInputsActive; } }
+    public bool jumpPressed { get { return playerInputActions.Movement.Jump.IsPressed() && PlayerMovementInputsActive; } }
+    public bool aimPressed { get { return playerInputActions.WeaponHandling.Aim.IsPressed() && WeaponHandlingInputsActive; } }
+    public bool shootPressed { get { return playerInputActions.WeaponHandling.Shoot.IsPressed() && WeaponHandlingInputsActive; } }
 
     private float interactHoldTime = 0.35f;
     private float reloadHoldTime = 0.2f;
 
+    public bool WeaponHandlingInputsActive { get; set; } = true;
+    public bool PlayerMovementInputsActive { get; set; } = true;
+    public bool InventoryInputsActive { get; set; } = true;
+    public static bool isUsingController
+    {
+        get {
+            if (usingDevice == null) return false;
+            bool usingKeyboardMouse = usingDevice.description.deviceClass.Equals("Keyboard") || usingDevice.description.deviceClass.Equals("Mouse");
+            return !usingKeyboardMouse;
+        }
+    }
+    public static bool isUsingKeyboardOrMouse { get { return !isUsingController; } }
+    private static InputDevice usingDevice;
     private void Awake()
     {
         if (_instance == null)
@@ -87,6 +103,9 @@ public class InputManager : MonoBehaviour
 
             playerInputActions.Movement.Look.performed += i => lookInput = i.ReadValue<Vector2>();
 
+            playerInputActions.FindAction("Move").performed += InputManager_MovePerformed;
+            playerInputActions.FindAction("Look").performed += InputManager_performed;
+
             playerInputActions.UI.Arrows.started += Arrows_started;
 
             playerInputActions.Interaction.Interact.started += Interact_started;
@@ -105,13 +124,26 @@ public class InputManager : MonoBehaviour
         playerInputActions.Enable();
     }
 
+    private void InputManager_performed(InputAction.CallbackContext obj)
+    {
+        usingDevice = obj.action.activeControl.device;
+    }
+
+    private void InputManager_MovePerformed(InputAction.CallbackContext obj)
+    {
+        usingDevice = obj.action.activeControl.device;
+    }
+
     private void Delete_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
+        if (!InventoryInputsActive) return;
         OnCancelClicked?.Invoke(this, EventArgs.Empty);
+        usingDevice = obj.action.activeControl.device; 
     }
 
     private void Arrows_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
+        if (!InventoryInputsActive) return;
         arrowInput = obj.ReadValue<Vector2>();
         ArrowKey clickedArrowKey = ArrowKey.None;
         switch (arrowInput.x)
@@ -133,33 +165,42 @@ public class InputManager : MonoBehaviour
                 break;
         }
         OnArrowClicked?.Invoke(this, new OnArrowClickedEventArgs {arrowKey = clickedArrowKey});
-            
+        usingDevice = obj.action.activeControl.device; 
     }
 
     private void Accept_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
+        if (!InventoryInputsActive) return;
         OnAcceptClicked?.Invoke(this, EventArgs.Empty);
+        usingDevice = obj.action.activeControl.device;
     }
 
     private void ToggleInventory_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
+        if (!InventoryInputsActive) return;
         OnInventoryToggle?.Invoke(this, EventArgs.Empty);
+        usingDevice = obj.action.activeControl.device;
     }
 
     private void Drop_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
+        if (!WeaponHandlingInputsActive) return;
         OnWeaponDropClicked?.Invoke(this, EventArgs.Empty);
+        usingDevice = obj.action.activeControl.device;
     }
 
     private void Reload_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
+        if (!WeaponHandlingInputsActive) return;
         StartCoroutine(ReloadCheckHold());
+        usingDevice = obj.action.activeControl.device;
     }
 
     private void Interact_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
         OnInteractionClicked?.Invoke(this, EventArgs.Empty);
         StartCoroutine(InteractCheckHold());
+        usingDevice = obj.action.activeControl.device;
     }
 
     IEnumerator InteractCheckHold()

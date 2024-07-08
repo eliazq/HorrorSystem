@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -41,7 +42,28 @@ public class InventoryUI : MonoBehaviour
         InputManager.Instance.OnArrowClicked += Instance_OnArrowClicked;
         InputManager.Instance.OnCancelClicked += Instance_OnCancelClicked;
 
+        ControllerManager.OnControllerDeviceChanged += Instance_OnUsingDeviceChanged;
+
         emptyInventoryIcon = itemSlots[0].itemSprite;
+    }
+
+    private void OnDestroy()
+    {
+        ControllerManager.OnControllerDeviceChanged -= Instance_OnUsingDeviceChanged;
+    }
+
+    private void Instance_OnUsingDeviceChanged(object sender, EventArgs e)
+    {
+        if (InputManager.isUsingController && isVisible)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+        else if (isVisible)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
     }
 
     private void Instance_OnCancelClicked(object sender, System.EventArgs e)
@@ -80,11 +102,29 @@ public class InventoryUI : MonoBehaviour
     private void Instance_OnInventoryToggle(object sender, System.EventArgs e)
     {
         ToggleInventory();
-        if (isVisible)
+        if (!isVisible)
         {
-            EventSystem.current.SetSelectedGameObject(itemSlots[currentIndex].gameObject);
-            SelectedItemSlot = EventSystem.current.currentSelectedGameObject;
+            InputManager.Instance.WeaponHandlingInputsActive = true;
+            return;
         }
+        
+        // INVENTORY VISIBLE
+        EventSystem.current.SetSelectedGameObject(itemSlots[currentIndex].gameObject);
+        SelectedItemSlot = EventSystem.current.currentSelectedGameObject;
+
+        InputManager.Instance.WeaponHandlingInputsActive = false;
+        
+        if (InputManager.isUsingController)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+
     }
 
     private void InventoryUI_OnInventoryChanged(object sender, System.EventArgs e)
@@ -92,11 +132,11 @@ public class InventoryUI : MonoBehaviour
         UpdateInventoryUI();        
     }
 
-    public void ToggleInventory()
+    private void ToggleInventory()
     {
         inventoryUI.SetActive(!inventoryUI.activeSelf);
         Cursor.lockState = inventoryUI.activeSelf ? CursorLockMode.None : CursorLockMode.Locked;
-        Cursor.visible = inventoryUI.activeSelf;
+        Cursor.visible = inventoryUI.activeSelf; 
     }
 
     private void UpdateInventoryUI()
@@ -115,17 +155,18 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
-    public void SelectNextItem()
+    private void SelectNextItem()
     {
         currentIndex = (currentIndex + 1) % itemSlots.Count;
         EventSystem.current.SetSelectedGameObject(itemSlots[currentIndex].gameObject);
         SelectedItemSlot = EventSystem.current.currentSelectedGameObject;
     }
 
-    public void SelectPreviousItem()
+    private void SelectPreviousItem()
     {
         currentIndex = (currentIndex - 1 + itemSlots.Count) % itemSlots.Count;
         EventSystem.current.SetSelectedGameObject(itemSlots[currentIndex].gameObject);
         SelectedItemSlot = EventSystem.current.currentSelectedGameObject;
     }
+
 }
