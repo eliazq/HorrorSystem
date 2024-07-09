@@ -22,7 +22,6 @@ public class Weapon : MonoBehaviour, IInteractable
     // Animation triggers
     const string shootTrigger = "Shoot";
     const string ReloadTrigger = "Reload";
-    const string OutOfAmmoBool = "OutOfAmmo";
     const string AimBool = "Aim";
     public int magSize{ get; private set; }
 
@@ -74,12 +73,6 @@ public class Weapon : MonoBehaviour, IInteractable
             isReloading = false;
         }
 
-        if (!isReloading){
-            if (magSize <= 0)
-                animator.SetBool(OutOfAmmoBool, true);
-            else animator.SetBool(OutOfAmmoBool, false);
-        }
-
         if (weaponHandling.IsAiming)
         {
             animator.SetBool(AimBool, true);
@@ -95,10 +88,10 @@ public class Weapon : MonoBehaviour, IInteractable
     private void OnPlayerShoot_Action(object sender, EventArgs e){
         if (IsPlayerWeapon)
         {
-            magSize -= 1;
             audioSource.clip = shootingClip;
             audioSource.PlayOneShot(shootingClip);
             animator.SetTrigger(shootTrigger);
+            magSize -= 1;
         }
     }
 
@@ -137,7 +130,7 @@ public class Weapon : MonoBehaviour, IInteractable
         weaponHandling.SetWeapon(this);
     }
     public string GetInteractText(){
-        return "PickUpWeapon";
+        return "Pick Up " + name;
     }
     public Transform GetTransform(){
         return transform;

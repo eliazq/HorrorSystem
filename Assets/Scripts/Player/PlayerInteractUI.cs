@@ -7,6 +7,7 @@ public class PlayerInteractUI : MonoBehaviour {
     [SerializeField] private GameObject containerGameObject;
     [SerializeField] private PlayerInteract playerInteract;
     [SerializeField] private TextMeshProUGUI interactTextMeshProUGUI;
+    [SerializeField] private TextMeshProUGUI interactKeyTextMeshProUGUI;
     [SerializeField] private WeaponHandling weaponHandling;
 
     private void Update() {
@@ -28,6 +29,10 @@ public class PlayerInteractUI : MonoBehaviour {
     private void Show(IInteractable interactable) {
         containerGameObject.SetActive(true);
         interactTextMeshProUGUI.text = interactable.GetInteractText();
+        if (InputManager.isUsingController)
+            interactKeyTextMeshProUGUI.text = "X";
+        else
+            interactKeyTextMeshProUGUI.text = "E";
     }
 
     private void Hide() {
