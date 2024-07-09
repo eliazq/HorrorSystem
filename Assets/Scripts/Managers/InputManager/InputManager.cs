@@ -37,8 +37,6 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    public event EventHandler OnUsingDeviceChanged;
-
     public event EventHandler OnInteractionHolded;
     public event EventHandler OnInteractionClicked;
     public event EventHandler OnReloadHolded;

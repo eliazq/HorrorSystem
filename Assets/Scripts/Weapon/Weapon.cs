@@ -95,10 +95,10 @@ public class Weapon : MonoBehaviour, IInteractable
     private void OnPlayerShoot_Action(object sender, EventArgs e){
         if (IsPlayerWeapon)
         {
+            magSize -= 1;
             audioSource.clip = shootingClip;
             audioSource.PlayOneShot(shootingClip);
             animator.SetTrigger(shootTrigger);
-            magSize -= 1;
         }
     }
 
@@ -107,6 +107,7 @@ public class Weapon : MonoBehaviour, IInteractable
         {
             realoadWeaponAmmo = reloadingWeaponsAmmo;
             animator.SetTrigger(ReloadTrigger);
+            animator.SetTrigger(shootTrigger); // After reloading shoot trigger would be on if not called here. it makes shoot anim after realoading if not this 
             StartCoroutine(SetReload());
         }
     }
