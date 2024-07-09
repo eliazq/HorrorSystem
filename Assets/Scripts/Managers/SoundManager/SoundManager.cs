@@ -57,7 +57,15 @@ public class SoundManager : MonoBehaviour
         public AudioClip audioClip;
     }
 
+    [System.Serializable]
+    public class SoundAudioClipArray
+    {
+        public Sound sound;
+        public AudioClip[] audioClips;
+    }
+
     public SoundClipsSO soundAudioClipsSO;
+    public SoundClipArraysSO soundClipsArraysSO;
 
     private static Dictionary<Sound, float> soundTimerDictionary;
     private static AudioSource oneShotAudioSource;
@@ -90,9 +98,45 @@ public class SoundManager : MonoBehaviour
     {
         GameObject oneShotGameObject = new GameObject("One Shot Sound");
         oneShotAudioSource = oneShotGameObject.AddComponent<AudioSource>();
+        oneShotAudioSource.volume = volume;
         oneShotAudioSource.outputAudioMixerGroup = Instance.audioMixer.outputAudioMixerGroup;
         DontDestroyOnLoad(oneShotGameObject);
         AudioClip audioClip = GetAudioClip(sound);
+        AudioMixerGroup[] audioMixerGroups = Instance.audioMixer.FindMatchingGroups(Instance.audioMixerGroup);
+        if (audioMixerGroups.Length > 0)
+        {
+            oneShotAudioSource.outputAudioMixerGroup = audioMixerGroups[0];
+        }
+        else
+        {
+            Debug.LogError("AudioMixerGroup not found");
+        }
+        oneShotAudioSource.clip = audioClip;
+        if (audioClip != null)
+        {
+            // Debug.Log($"Playing sound: {sound} as one-shot");
+            oneShotAudioSource.gameObject.transform.position = position;
+            oneShotAudioSource.spatialBlend = 1f; // 3d sound
+            oneShotAudioSource.clip = audioClip;
+            oneShotAudioSource.Play();
+        }
+        else
+        {
+            Debug.LogError($"AudioClip for sound: {sound} is null");
+            Destroy(oneShotGameObject);
+        }
+        Destroy(oneShotAudioSource, audioClip.length);
+    }
+
+    public static void PlaySoundRandom(Sound sound, Vector3 position, float volume = 1f)
+    {
+        GameObject oneShotGameObject = new GameObject("One Shot Sound");
+        oneShotAudioSource = oneShotGameObject.AddComponent<AudioSource>();
+        oneShotAudioSource.volume = volume;
+        oneShotAudioSource.outputAudioMixerGroup = Instance.audioMixer.outputAudioMixerGroup;
+        DontDestroyOnLoad(oneShotGameObject);
+        AudioClip[] audioClipArray = GetAudioClipArray(sound);
+        AudioClip audioClip = audioClipArray[Random.Range(0, audioClipArray.Length)];
         AudioMixerGroup[] audioMixerGroups = Instance.audioMixer.FindMatchingGroups(Instance.audioMixerGroup);
         if (audioMixerGroups.Length > 0)
         {
@@ -148,6 +192,37 @@ public class SoundManager : MonoBehaviour
         Destroy(oneShotAudioSource, audioClip.length);
     }
 
+    public static void PlaySoundRandom(Sound sound)
+    {
+        GameObject oneShotGameObject = new GameObject("One Shot Sound");
+        oneShotAudioSource = oneShotGameObject.AddComponent<AudioSource>();
+        oneShotAudioSource.outputAudioMixerGroup = Instance.audioMixer.outputAudioMixerGroup;
+        DontDestroyOnLoad(oneShotGameObject);
+        AudioClip[] audioClipArray = GetAudioClipArray(sound);
+        AudioClip audioClip = audioClipArray[Random.Range(0, audioClipArray.Length)];
+        AudioMixerGroup[] audioMixerGroups = Instance.audioMixer.FindMatchingGroups(Instance.audioMixerGroup);
+        if (audioMixerGroups.Length > 0)
+        {
+            oneShotAudioSource.outputAudioMixerGroup = audioMixerGroups[0];
+        }
+        else
+        {
+            Debug.LogError("AudioMixerGroup not found");
+        }
+        oneShotAudioSource.clip = audioClip;
+        if (audioClip != null)
+        {
+            oneShotAudioSource.clip = audioClip;
+            oneShotAudioSource.Play();
+        }
+        else
+        {
+            Debug.LogError($"AudioClip for sound: {sound} is null");
+            Destroy(oneShotGameObject);
+        }
+        Destroy(oneShotAudioSource, audioClip.length);
+    }
+
     public static void PlaySound(Sound sound, float volume)
     {
         GameObject oneShotGameObject = new GameObject("One Shot Sound");
@@ -174,6 +249,38 @@ public class SoundManager : MonoBehaviour
         {
             Debug.LogError($"AudioClip for sound: {sound} is null");
             Destroy(oneShotAudioSource);
+        }
+        Destroy(oneShotAudioSource, audioClip.length);
+    }
+
+    public static void PlaySoundRandom(Sound sound, float volume)
+    {
+        GameObject oneShotGameObject = new GameObject("One Shot Sound");
+        oneShotAudioSource = oneShotGameObject.AddComponent<AudioSource>();
+        oneShotAudioSource.volume = volume;
+        oneShotAudioSource.outputAudioMixerGroup = Instance.audioMixer.outputAudioMixerGroup;
+        DontDestroyOnLoad(oneShotGameObject);
+        AudioClip[] audioClipArray = GetAudioClipArray(sound);
+        AudioClip audioClip = audioClipArray[Random.Range(0, audioClipArray.Length)];
+        AudioMixerGroup[] audioMixerGroups = Instance.audioMixer.FindMatchingGroups(Instance.audioMixerGroup);
+        if (audioMixerGroups.Length > 0)
+        {
+            oneShotAudioSource.outputAudioMixerGroup = audioMixerGroups[0];
+        }
+        else
+        {
+            Debug.LogError("AudioMixerGroup not found");
+        }
+        oneShotAudioSource.clip = audioClip;
+        if (audioClip != null)
+        {
+            oneShotAudioSource.clip = audioClip;
+            oneShotAudioSource.Play();
+        }
+        else
+        {
+            Debug.LogError($"AudioClip for sound: {sound} is null");
+            Destroy(oneShotGameObject);
         }
         Destroy(oneShotAudioSource, audioClip.length);
     }
@@ -227,6 +334,19 @@ public class SoundManager : MonoBehaviour
             if (soundAudioClip.sound == sound)
             {
                 return soundAudioClip.audioClip;
+            }
+        }
+        Debug.LogError("Sound " + sound + " not found!");
+        return null;
+    }
+
+    private static AudioClip[] GetAudioClipArray(Sound sound)
+    {
+        foreach (SoundAudioClipArray soundAudioClipArray in Instance.soundClipsArraysSO.soundAudioClipArrays)
+        {
+            if (soundAudioClipArray.sound == sound)
+            {
+                return soundAudioClipArray.audioClips;
             }
         }
         Debug.LogError("Sound " + sound + " not found!");
