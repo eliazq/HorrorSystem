@@ -46,4 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioMixerGroup: Master
   soundAudioClipsSO: {fileID: 11400000, guid: a65ba99f196f4d445a34e3102fdc8382, type: 2}
-  audioMixer: {fileID: 0}
+  audioMixer: {fileID: 24100000, guid: 6be5028b48123ba488459b04ca67eaeb, type: 2}

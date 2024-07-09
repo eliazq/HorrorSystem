@@ -5,17 +5,13 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour, IInteractable
 {
-    [Header("Data")]
+    [Header("Scriptable Object")]
     [SerializeField] private WeaponData weaponData;
 
     [Header("References")]
     [SerializeField] private Transform shootingPoint;
     [SerializeField] private Animator animator;
     [SerializeField] private Transform handlerTransform;
-
-    [Header("Audio")]
-    [SerializeField] private AudioSource audioSource;
-    [SerializeField] private AudioClip shootingClip;
 
     private WeaponHandling weaponHandling;
     
@@ -88,8 +84,7 @@ public class Weapon : MonoBehaviour, IInteractable
     private void OnPlayerShoot_Action(object sender, EventArgs e){
         if (IsPlayerWeapon)
         {
-            audioSource.clip = shootingClip;
-            audioSource.PlayOneShot(shootingClip);
+            SoundManager.PlaySound(Data.shootingSound);
             animator.SetTrigger(shootTrigger);
             magSize -= 1;
         }
@@ -102,6 +97,7 @@ public class Weapon : MonoBehaviour, IInteractable
             animator.SetTrigger(ReloadTrigger);
             animator.SetTrigger(shootTrigger); // After reloading shoot trigger would be on if not called here. it makes shoot anim after realoading if not this 
             StartCoroutine(SetReload());
+            SoundManager.PlaySound(Data.reloadSound, transform.position);
         }
     }
 
