@@ -49,7 +49,6 @@ public class HandHeadBob : MonoBehaviour
     Quaternion StartRot;
     [SerializeField] FirstPersonController firstPersonController;
     bool isWalkingSettings = true;
-    bool setFirstTime = true;
 
     void Start()
     {

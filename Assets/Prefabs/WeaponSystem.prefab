@@ -44,9 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6494f7652fac144ba330febe4966b2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundLayerName: Ground
-  trailPrefab: {fileID: 1076372297178575714, guid: fad36a6bf47afa54a8771968845f4566, type: 3}
-  impactEffect: {fileID: 100006, guid: 9e95c7b2183a4f345aaf86846f8f1918, type: 3}
+  layerImpactList: {fileID: 11400000, guid: 54b2c33cd13837247a195c312d21992a, type: 2}
   impactDestroyTime: 50
+  muzzleFlashPrefab: {fileID: 5524744043117906595, guid: e8780ae459689ff40a811b7489d58f6f, type: 3}
+  muzzleFlashDestroyTime: 0.1
+  trailPrefab: {fileID: 1076372297178575714, guid: fad36a6bf47afa54a8771968845f4566, type: 3}
   trailTime: 0.15
-  impactForce: 250

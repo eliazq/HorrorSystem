@@ -6638,10 +6638,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvases
       objectReference: {fileID: 0}
-    - target: {fileID: 7153777636271270775, guid: 7e5969c250a4aae4e9b81a12e6534e70, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6714,18 +6710,6 @@ PrefabInstance:
     - target: {fileID: 3345938251481968549, guid: 12ed7c2dc34429a44953db400a329ef7, type: 3}
       propertyPath: m_Name
       value: WeaponSystem
-      objectReference: {fileID: 0}
-    - target: {fileID: 7603630339637726032, guid: 12ed7c2dc34429a44953db400a329ef7, type: 3}
-      propertyPath: layerImpactList
-      value: 
-      objectReference: {fileID: 11400000, guid: 54b2c33cd13837247a195c312d21992a, type: 2}
-    - target: {fileID: 7603630339637726032, guid: 12ed7c2dc34429a44953db400a329ef7, type: 3}
-      propertyPath: muzzleFlashPrefab
-      value: 
-      objectReference: {fileID: 5524744043117906595, guid: e8780ae459689ff40a811b7489d58f6f, type: 3}
-    - target: {fileID: 7603630339637726032, guid: 12ed7c2dc34429a44953db400a329ef7, type: 3}
-      propertyPath: muzzleFlashDestroyTime
-      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7629,14 +7613,6 @@ PrefabInstance:
     - target: {fileID: 655064570098639361, guid: 29e7b922de7a1d6449736ad8173ab309, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4764555046332514250, guid: 29e7b922de7a1d6449736ad8173ab309, type: 3}
-      propertyPath: aimingFrequency
-      value: 2.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 4764555046332514250, guid: 29e7b922de7a1d6449736ad8173ab309, type: 3}
-      propertyPath: breathingMovementSpeed
-      value: 0.005
       objectReference: {fileID: 0}
     - target: {fileID: 6784432793022247508, guid: 29e7b922de7a1d6449736ad8173ab309, type: 3}
       propertyPath: inventoryUI

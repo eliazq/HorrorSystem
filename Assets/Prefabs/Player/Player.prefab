@@ -234,6 +234,8 @@ MonoBehaviour:
   handBobStopTime: 8
   idleAmount: 0.004
   idleFrequency: 1
+  aimingAmount: 0.001
+  aimingFrequency: 2.9
   walkingAmount: 0.035
   walkingFrequency: 10
   runningAmount: 0.025
@@ -241,11 +243,10 @@ MonoBehaviour:
   walkSmooth: 4.6
   runningSmooth: 7
   idleSmooth: 10
+  aimingSmooth: 10
   LeanAmount: 10
   LeanTime: 5
   firstPersonController: {fileID: 9174859579730788268}
-  breathingMovementRadius: 0.003
-  breathingMovementSpeed: 0.0025
 --- !u!1 &4956397359936895974
 GameObject:
   m_ObjectHideFlags: 0
