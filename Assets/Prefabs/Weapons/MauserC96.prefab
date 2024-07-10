@@ -922,6 +922,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 056611517a403894a8636acac1803420, type: 2}
     - target: {fileID: 959786197035428676, guid: ce0ea6db39e17554685ca8b86a15bfda, type: 3}
+      propertyPath: reloadSound
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 959786197035428676, guid: ce0ea6db39e17554685ca8b86a15bfda, type: 3}
       propertyPath: shootingClip
       value: 
       objectReference: {fileID: 8300000, guid: 3cb3df6b5e08f304f83e364ac921bb29, type: 3}
@@ -929,6 +933,10 @@ PrefabInstance:
       propertyPath: shootingPoint
       value: 
       objectReference: {fileID: 6822520396157942098}
+    - target: {fileID: 959786197035428676, guid: ce0ea6db39e17554685ca8b86a15bfda, type: 3}
+      propertyPath: shootingSound
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 959786197035428676, guid: ce0ea6db39e17554685ca8b86a15bfda, type: 3}
       propertyPath: handlerTransform
       value: 

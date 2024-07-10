@@ -48,7 +48,6 @@ public class HandHeadBob : MonoBehaviour
     Vector3 StartPos;
     Quaternion StartRot;
     [SerializeField] FirstPersonController firstPersonController;
-    bool isWalkingSettings = true;
 
     void Start()
     {
@@ -118,12 +117,12 @@ public class HandHeadBob : MonoBehaviour
     {
         if (firstPersonController.IsWalking)
         {
-            if (!isWalkingSettings) SetWalkingHeadBobSettings();
+            SetWalkingHeadBobSettings();
             StartHeadBob();
         }
         else if (firstPersonController.IsRunning)
         {
-            if (isWalkingSettings) SetRunningHeadBobSettings();
+            SetRunningHeadBobSettings();
             StartHeadBob();
         }
         else if (!Player.Instance.WeaponHandling.IsAiming)
@@ -143,7 +142,6 @@ public class HandHeadBob : MonoBehaviour
         Amount = walkingAmount;
         Frequency = walkingFrequency;
         Smooth = walkSmooth;
-        isWalkingSettings = true;
     }
 
     private void SetRunningHeadBobSettings()
@@ -151,7 +149,6 @@ public class HandHeadBob : MonoBehaviour
         Amount = runningAmount;
         Frequency = runningFrequency;
         Smooth = runningSmooth;
-        isWalkingSettings = false;
     }
 
     private void SetIdleHeadBobSettings()
@@ -159,14 +156,12 @@ public class HandHeadBob : MonoBehaviour
         Amount = idleAmount;
         Frequency = idleFrequency;
         Smooth = idleSmooth;
-        isWalkingSettings = false;
     }
     private void SetAimingHeadBobSettings()
     {
         Amount = aimingAmount;
         Frequency = aimingFrequency;
         Smooth = aimingSmooth;
-        isWalkingSettings = false;
     }
 
     private Vector3 StartHeadBob()

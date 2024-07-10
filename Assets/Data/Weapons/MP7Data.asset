@@ -15,4 +15,6 @@ MonoBehaviour:
   fireRate: 6
   shootingDistance: 70
   maxMagSize: 20
+  shootingSound: 5
+  reloadSound: 6
   weaponType: 1

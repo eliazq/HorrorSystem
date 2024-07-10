@@ -54,8 +54,8 @@ MonoBehaviour:
   shootingPoint: {fileID: 3605267606820579127}
   animator: {fileID: 7310021018742163777}
   handlerTransform: {fileID: 3522211651541592346}
-  audioSource: {fileID: 2045890370849629766}
-  shootingClip: {fileID: 8300000, guid: 9fb67e381b571414b99959d66d9cde84, type: 3}
+  shootingSound: 5
+  reloadSound: 6
 --- !u!65 &2819678232906572196
 BoxCollider:
   m_ObjectHideFlags: 0

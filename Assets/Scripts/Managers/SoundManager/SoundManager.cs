@@ -145,8 +145,10 @@ public class SoundManager : MonoBehaviour
         oneShotAudioSource.outputAudioMixerGroup = Instance.audioMixer.outputAudioMixerGroup;
         DontDestroyOnLoad(oneShotGameObject);
         AudioClip[] audioClipArray = GetAudioClipArray(sound);
-        AudioClip audioClip = audioClipArray[Random.Range(0, audioClipArray.Length)];
-        if (audioClip == null) audioClip = GetAudioClip(sound);
+        AudioClip audioClip;
+        if (audioClipArray != null)
+             audioClip = audioClipArray[Random.Range(0, audioClipArray.Length)];
+        else audioClip = GetAudioClip(sound);
         AudioMixerGroup[] audioMixerGroups = Instance.audioMixer.FindMatchingGroups(Instance.audioMixerGroup);
         if (audioMixerGroups.Length > 0)
         {
@@ -211,8 +213,10 @@ public class SoundManager : MonoBehaviour
         oneShotAudioSource.outputAudioMixerGroup = Instance.audioMixer.outputAudioMixerGroup;
         DontDestroyOnLoad(oneShotGameObject);
         AudioClip[] audioClipArray = GetAudioClipArray(sound);
-        AudioClip audioClip = audioClipArray[Random.Range(0, audioClipArray.Length)];
-        if (audioClip == null) audioClip = GetAudioClip(sound);
+        AudioClip audioClip;
+        if (audioClipArray != null)
+             audioClip = audioClipArray[Random.Range(0, audioClipArray.Length)];
+        else audioClip = GetAudioClip(sound);
         AudioMixerGroup[] audioMixerGroups = Instance.audioMixer.FindMatchingGroups(Instance.audioMixerGroup);
         if (audioMixerGroups.Length > 0)
         {
@@ -307,7 +311,6 @@ public class SoundManager : MonoBehaviour
                 return soundAudioClipArray.audioClips;
             }
         }
-        Debug.LogError("Sound " + sound + " not found!");
         return null;
     }
 }

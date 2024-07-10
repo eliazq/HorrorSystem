@@ -84,8 +84,8 @@ MonoBehaviour:
   shootingPoint: {fileID: 3252102357112699307}
   animator: {fileID: 7828551710828089427}
   handlerTransform: {fileID: 925053446509104998}
-  audioSource: {fileID: 7366337073910441272}
-  shootingClip: {fileID: 8300000, guid: 9fb67e381b571414b99959d66d9cde84, type: 3}
+  shootingSound: 5
+  reloadSound: 6
 --- !u!136 &4351865087013751682
 CapsuleCollider:
   m_ObjectHideFlags: 0
