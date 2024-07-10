@@ -1391,35 +1391,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 630483046}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!1 &462385802 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3332864527104179630, guid: 29e7b922de7a1d6449736ad8173ab309, type: 3}
-  m_PrefabInstance: {fileID: 2948375592382465439}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &462385804
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 462385802}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a3ae4535e970da4985a82c7edf735a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  handBobStopTime: 8
-  walkingAmount: 0.035
-  walkingFrequency: 10
-  runningAmount: 0.025
-  runningFrequency: 19.62
-  walkSmooth: 4.6
-  runningSmooth: 7
-  LeanAmount: 10
-  LeanTime: 5
-  firstPersonController: {fileID: 1216219549}
-  breathingMovementRadius: 0.003
-  breathingMovementSpeed: 0.0025
 --- !u!1001 &500094947
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3886,17 +3857,6 @@ Transform:
   - {fileID: 25132266}
   m_Father: {fileID: 1884308071}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1216219549 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9174859579730788268, guid: 29e7b922de7a1d6449736ad8173ab309, type: 3}
-  m_PrefabInstance: {fileID: 2948375592382465439}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b67cb6790088114688603cf5f570000, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1226596855
 GameObject:
   m_ObjectHideFlags: 0
@@ -7670,21 +7630,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1735030261909837482, guid: 29e7b922de7a1d6449736ad8173ab309, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.1655
+    - target: {fileID: 4764555046332514250, guid: 29e7b922de7a1d6449736ad8173ab309, type: 3}
+      propertyPath: aimingFrequency
+      value: 2.9
       objectReference: {fileID: 0}
-    - target: {fileID: 3938477456863210961, guid: 29e7b922de7a1d6449736ad8173ab309, type: 3}
-      propertyPath: m_CastShadows
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6733204670698856640, guid: 29e7b922de7a1d6449736ad8173ab309, type: 3}
-      propertyPath: m_Data.m_MaintainTargetPositionOffset
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6733204670698856640, guid: 29e7b922de7a1d6449736ad8173ab309, type: 3}
-      propertyPath: m_Data.m_MaintainTargetRotationOffset
-      value: 0
+    - target: {fileID: 4764555046332514250, guid: 29e7b922de7a1d6449736ad8173ab309, type: 3}
+      propertyPath: breathingMovementSpeed
+      value: 0.005
       objectReference: {fileID: 0}
     - target: {fileID: 6784432793022247508, guid: 29e7b922de7a1d6449736ad8173ab309, type: 3}
       propertyPath: inventoryUI
@@ -7692,10 +7644,6 @@ PrefabInstance:
       objectReference: {fileID: 1338356689}
     - target: {fileID: 6784432793022247508, guid: 29e7b922de7a1d6449736ad8173ab309, type: 3}
       propertyPath: itemSlotParent
-      value: 
-      objectReference: {fileID: 1090294806}
-    - target: {fileID: 6784432793022247508, guid: 29e7b922de7a1d6449736ad8173ab309, type: 3}
-      propertyPath: itemSlothParent
       value: 
       objectReference: {fileID: 1090294806}
     - target: {fileID: 6866968260120609243, guid: 29e7b922de7a1d6449736ad8173ab309, type: 3}
@@ -7722,21 +7670,10 @@ PrefabInstance:
       propertyPath: interactKeyTextMeshProUGUI
       value: 
       objectReference: {fileID: 1120078887}
-    - target: {fileID: 9174859579730788268, guid: 29e7b922de7a1d6449736ad8173ab309, type: 3}
-      propertyPath: mouseSensitivity
-      value: 300
-      objectReference: {fileID: 0}
-    - target: {fileID: 9174859579730788268, guid: 29e7b922de7a1d6449736ad8173ab309, type: 3}
-      propertyPath: groundLayer.m_Bits
-      value: 65
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3332864527104179630, guid: 29e7b922de7a1d6449736ad8173ab309, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 462385804}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29e7b922de7a1d6449736ad8173ab309, type: 3}
 --- !u!1001 &5143872467041676005
 PrefabInstance:

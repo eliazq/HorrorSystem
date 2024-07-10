@@ -196,6 +196,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1735030261909837482}
+  - component: {fileID: 4764555046332514250}
   m_Layer: 0
   m_Name: HandForGunPosition
   m_TagString: Untagged
@@ -212,12 +213,39 @@ Transform:
   m_GameObject: {fileID: 3332864527104179630}
   serializedVersion: 2
   m_LocalRotation: {x: 0.03245645, y: -0.0076753325, z: 0.00024925268, w: 0.9994437}
-  m_LocalPosition: {x: 0.165, y: -0.17, z: 0.451}
+  m_LocalPosition: {x: 0.1655, y: -0.17, z: 0.451}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6884328556309297661}
   m_LocalEulerAnglesHint: {x: 3.72, y: -0.88, z: 0}
+--- !u!114 &4764555046332514250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3332864527104179630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a3ae4535e970da4985a82c7edf735a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handBobStopTime: 8
+  idleAmount: 0.004
+  idleFrequency: 1
+  walkingAmount: 0.035
+  walkingFrequency: 10
+  runningAmount: 0.025
+  runningFrequency: 19.6
+  walkSmooth: 4.6
+  runningSmooth: 7
+  idleSmooth: 10
+  LeanAmount: 10
+  LeanTime: 5
+  firstPersonController: {fileID: 9174859579730788268}
+  breathingMovementRadius: 0.003
+  breathingMovementSpeed: 0.0025
 --- !u!1 &4956397359936895974
 GameObject:
   m_ObjectHideFlags: 0
@@ -369,8 +397,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryUI: {fileID: 0}
-  itemSlothParent: {fileID: 0}
-  emptyInventoryIcon: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  itemSlotParent: {fileID: 0}
+  selectedItemSlot: {fileID: 0}
 --- !u!1 &6866968260120609243
 GameObject:
   m_ObjectHideFlags: 0
@@ -455,8 +483,10 @@ MonoBehaviour:
   groundCheck: {fileID: 0}
   groundLayer:
     serializedVersion: 2
-    m_Bits: 64
-  mouseSensitivity: 500
+    m_Bits: 65
+  mouseSensitivity: 300
+  lookMouseSensitivity: 300
+  aimMouseSensitivity: 100
   maxLookUp: -69
   maxLookDown: 58
   runningFovAmount: 5
@@ -507,6 +537,7 @@ MonoBehaviour:
   containerGameObject: {fileID: 0}
   playerInteract: {fileID: 7191160807959969133}
   interactTextMeshProUGUI: {fileID: 0}
+  interactKeyTextMeshProUGUI: {fileID: 0}
   weaponHandling: {fileID: 1231384706437568455}
 --- !u!114 &1231384706437568455
 MonoBehaviour:
@@ -603,6 +634,10 @@ PrefabInstance:
     - target: {fileID: 3645246250121813118, guid: a5a13b27f3fb03b418ee974998f0ccd3, type: 3}
       propertyPath: m_Name
       value: CharacterModel
+      objectReference: {fileID: 0}
+    - target: {fileID: 4610968006526229453, guid: a5a13b27f3fb03b418ee974998f0ccd3, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8825467780661982874, guid: a5a13b27f3fb03b418ee974998f0ccd3, type: 3}
       propertyPath: m_LocalPosition.x
