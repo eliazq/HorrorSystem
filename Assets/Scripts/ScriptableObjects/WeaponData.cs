@@ -15,5 +15,4 @@ public class WeaponData : ScriptableObject
         Pistol,
         Submachine
     }
-
 }
