@@ -271,7 +271,6 @@ public class SoundManager : MonoBehaviour
         {
             Debug.LogError("AudioMixerGroup not found");
         }
-        oneShotAudioSource.clip = audioClip;
         if (audioClip != null)
         {
             oneShotAudioSource.clip = audioClip;
@@ -290,6 +289,14 @@ public class SoundManager : MonoBehaviour
         if (CanPlaySound(sound, cooldown))
         {
             PlaySound(sound, volume);
+        }
+    }
+
+    public static void PlaySoundRandomWithCooldown(Sound sound, float cooldown, float volume = 1f)
+    {
+        if (CanPlaySound(sound, cooldown))
+        {
+            PlaySoundRandom(sound, volume);
         }
     }
 

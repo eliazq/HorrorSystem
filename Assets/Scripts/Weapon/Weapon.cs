@@ -97,7 +97,7 @@ public class Weapon : MonoBehaviour, IInteractable
             animator.SetTrigger(ReloadTrigger);
             animator.SetTrigger(shootTrigger); // After reloading shoot trigger would be on if not called here. it makes shoot anim after realoading if not this 
             StartCoroutine(SetReload());
-            SoundManager.PlaySound(Data.reloadSound, transform.position, 0.4f);
+            SoundManager.PlaySoundRandom(SoundManager.Sound.MauserC96Reload, transform.position, 0.4f);
         }
     }
 
