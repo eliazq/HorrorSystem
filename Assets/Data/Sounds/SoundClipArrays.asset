@@ -15,6 +15,5 @@ MonoBehaviour:
   soundAudioClipArrays:
   - sound: 6
     audioClips:
-    - {fileID: 8300000, guid: 189c11e601191eb419a0688bbae914fe, type: 3}
     - {fileID: 8300000, guid: cb67487dc34a4a54198882649010915b, type: 3}
     - {fileID: 8300000, guid: 97077915ecb1f1843998bdc5348e6419, type: 3}
