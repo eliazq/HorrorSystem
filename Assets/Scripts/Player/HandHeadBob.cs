@@ -48,15 +48,21 @@ public class HandHeadBob : MonoBehaviour
     Vector3 StartPos;
     Quaternion StartRot;
     [SerializeField] FirstPersonController firstPersonController;
+    [SerializeField] private CameraShake cameraShake;
 
     void Start()
     {
         StartPos = transform.localPosition;
         StartRot = transform.localRotation;
-
         if (firstPersonController == null) 
             firstPersonController = GetComponentInParent<FirstPersonController>();
         SetWalkingHeadBobSettings();
+        Player.Instance.WeaponHandling.OnShoot += WeaponHandling_OnShoot;
+    }
+
+    private void WeaponHandling_OnShoot(object sender, System.EventArgs e)
+    {
+        cameraShake.ShakeCamera();
     }
 
     void Update()
