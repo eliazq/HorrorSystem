@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
-using UnityEngine.Rendering;
 
 public class SoundManager : MonoBehaviour
 {
@@ -80,11 +80,13 @@ public class SoundManager : MonoBehaviour
     #endregion
 
     #region Variables
+
     public SoundClipsSO soundAudioClipsSO;
     public SoundClipArraysSO soundClipsArraysSO;
-
-    private static Dictionary<Sound, float> soundTimerDictionary;
     private static AudioSource oneShotAudioSource;
+    public Dictionary<Sound, GameObject> playingSounds = new Dictionary<Sound, GameObject>();
+    public static Dictionary<Sound, float> soundTimerDictionary;
+
     #endregion
 
     private void Awake()
@@ -100,7 +102,6 @@ public class SoundManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
     private static void Initialize()
     {
         soundTimerDictionary = new Dictionary<Sound, float>();
@@ -109,7 +110,6 @@ public class SoundManager : MonoBehaviour
             soundTimerDictionary[sound] = 0f;
         }
     }
-
     public static void PlaySound(Sound sound, Vector3 position, float volume = 1f)
     {
         GameObject oneShotGameObject = new GameObject("One Shot Sound");
@@ -135,6 +135,7 @@ public class SoundManager : MonoBehaviour
             oneShotAudioSource.spatialBlend = 1f; // 3d sound
             oneShotAudioSource.clip = audioClip;
             oneShotAudioSource.Play();
+            Instance.AddPlayingSound(oneShotAudioSource, sound);
         }
         else
         {
@@ -143,7 +144,6 @@ public class SoundManager : MonoBehaviour
         }
         Destroy(oneShotAudioSource, audioClip.length);
     }
-
     public static void PlaySoundRandom(Sound sound, Vector3 position, float volume = 1f)
     {
         GameObject oneShotGameObject = new GameObject("One Shot Sound");
@@ -173,6 +173,7 @@ public class SoundManager : MonoBehaviour
             oneShotAudioSource.spatialBlend = 1f; // 3d sound
             oneShotAudioSource.clip = audioClip;
             oneShotAudioSource.Play();
+            Instance.AddPlayingSound(oneShotAudioSource, sound);
         }
         else
         {
@@ -209,15 +210,49 @@ public class SoundManager : MonoBehaviour
             // Debug.Log($"Playing sound: {sound} as one-shot");
             oneShotAudioSource.clip = audioClip;
             oneShotAudioSource.Play();
+            Instance.AddPlayingSound(oneShotAudioSource, sound);
         }
         else
         {
             Debug.LogError($"AudioClip for sound: {sound} is null");
             Destroy(oneShotAudioSource);
         }
-        Destroy(oneShotAudioSource, audioClip.length);
     }
+    private void AddPlayingSound(AudioSource oneShotAudioSource, Sound sound)
+    {
+        if (playingSounds.ContainsKey(sound)) return;
+        StartCoroutine(AddPlayingSoundCoroutine(oneShotAudioSource, sound));
+    }
+    IEnumerator AddPlayingSoundCoroutine(AudioSource oneShotAudioSource, Sound sound)
+    {
+        Debug.Log("Playing sound Added");
+        playingSounds.Add(sound, oneShotAudioSource.gameObject);
+        float timer = 0;
+        bool soundHasStopped = false;
+        float clipLenght = oneShotAudioSource.clip.length;
 
+        while (timer < clipLenght)
+        {
+            timer += Time.deltaTime;
+            if (oneShotAudioSource == null)
+            {
+                soundHasStopped = true;
+                break;
+            }
+            yield return null;
+        }
+        if (!soundHasStopped)
+            StopPlayingSound(sound);
+    }
+    public static void StopPlayingSound(Sound sound)
+    {
+        if (Instance.playingSounds.TryGetValue(sound, out GameObject oneShotAudioSource))
+        {
+            Debug.Log("Playing sound removed");
+            Instance.playingSounds.Remove(sound);
+            Destroy(oneShotAudioSource);
+        }
+    }
     public static void PlaySoundRandom(Sound sound, float volume = 1f)
     {
         GameObject oneShotGameObject = new GameObject("One Shot Sound");
@@ -243,6 +278,7 @@ public class SoundManager : MonoBehaviour
         {
             oneShotAudioSource.clip = audioClip;
             oneShotAudioSource.Play();
+            Instance.AddPlayingSound(oneShotAudioSource, sound);
         }
         else
         {
@@ -251,7 +287,6 @@ public class SoundManager : MonoBehaviour
         }
         Destroy(oneShotAudioSource, audioClip.length);
     }
-
     public static void PlaySoundWithCooldown(Sound sound, float cooldown, float volume = 1f)
     {
         if (CanPlaySound(sound, cooldown))
@@ -259,7 +294,6 @@ public class SoundManager : MonoBehaviour
             PlaySound(sound, volume);
         }
     }
-
     public static void PlaySoundRandomWithCooldown(Sound sound, float cooldown, float volume = 1f)
     {
         if (CanPlaySound(sound, cooldown))
@@ -267,7 +301,6 @@ public class SoundManager : MonoBehaviour
             PlaySoundRandom(sound, volume);
         }
     }
-
     private static bool CanPlaySound(Sound sound, float cooldown)
     {
         if (soundTimerDictionary == null)

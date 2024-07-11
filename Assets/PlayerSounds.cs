@@ -14,17 +14,14 @@ public class PlayerSounds : MonoBehaviour
     {
         if (firstPersonController.IsWalking)
         {
-            SoundManager.PlaySoundRandomWithCooldown(SoundManager.Sound.Walking, SoundManager.GetSoundLenght(SoundManager.Sound.Walking));
-            SoundManager.PlaySoundRandomWithCooldown(SoundManager.Sound.WalkingBreathing, SoundManager.GetSoundLenght(SoundManager.Sound.WalkingBreathing));
+            if (SoundManager.Instance.playingSounds.ContainsKey(SoundManager.Sound.Walking)) return;
+            SoundManager.PlaySound(SoundManager.Sound.Walking);
         }
-        else if (firstPersonController.IsRunning)
+        else
         {
-            SoundManager.PlaySoundRandomWithCooldown(SoundManager.Sound.Running, SoundManager.GetSoundLenght(SoundManager.Sound.Running));
-            SoundManager.PlaySoundRandomWithCooldown(SoundManager.Sound.RunningBreathing, SoundManager.GetSoundLenght(SoundManager.Sound.RunningBreathing));
+            if (SoundManager.Instance.playingSounds.ContainsKey(SoundManager.Sound.Walking))
+                SoundManager.StopPlayingSound(SoundManager.Sound.Walking);
         }
-        else if (firstPersonController.IsGrounded)
-        {
-            SoundManager.PlaySoundRandomWithCooldown(SoundManager.Sound.IdleBreathing, SoundManager.GetSoundLenght(SoundManager.Sound.IdleBreathing));
-        }
+        
     }
 }
