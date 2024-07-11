@@ -15,6 +15,7 @@ public class FirstPersonController : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private Camera playerCamera;
+    [SerializeField] private Transform cameraRootTransform;
     [SerializeField] private CharacterController characterController;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
@@ -80,6 +81,7 @@ public class FirstPersonController : MonoBehaviour
         mouseSensitivity = lookMouseSensitivity;
         // If camera not set, try get it from tag MainCamera
         if (playerCamera == null) playerCamera = Camera.main;
+        if (cameraRootTransform == null) cameraRootTransform = playerCamera.transform.parent;
 
         // If characterController not set, try to get it from this GameObject
         if (characterController == null) characterController = GetComponent<CharacterController>();
@@ -200,7 +202,7 @@ public class FirstPersonController : MonoBehaviour
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, maxLookUp, maxLookDown);
 
-        playerCamera.transform.localRotation = Quaternion.Euler(xRotation, playerCamera.transform.localRotation.y, playerCamera.transform.localRotation.z);
+        cameraRootTransform.localRotation = Quaternion.Euler(xRotation, cameraRootTransform.localRotation.y, cameraRootTransform.localRotation.z);
         UpdateCameraFov();
     }
 
