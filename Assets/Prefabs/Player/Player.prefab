@@ -1,5 +1,37 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &184106372504866783
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2436679387607686076}
+  m_Layer: 0
+  m_Name: HandHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2436679387607686076
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 184106372504866783}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1735030261909837482}
+  m_Father: {fileID: 3314474763378862573}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &391448550608249117
 GameObject:
   m_ObjectHideFlags: 0
@@ -214,11 +246,11 @@ Transform:
   m_GameObject: {fileID: 3332864527104179630}
   serializedVersion: 2
   m_LocalRotation: {x: 0.03245645, y: -0.0076753325, z: 0.00024925268, w: 0.9994437}
-  m_LocalPosition: {x: 0.1655, y: -0.17, z: 0.451}
+  m_LocalPosition: {x: 0.1655, y: -0.16999996, z: 0.45100003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3314474763378862573}
+  m_Father: {fileID: 2436679387607686076}
   m_LocalEulerAnglesHint: {x: 3.72, y: -0.88, z: 0}
 --- !u!114 &4764555046332514250
 MonoBehaviour:
@@ -625,7 +657,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6884328556309297661}
-  - {fileID: 1735030261909837482}
+  - {fileID: 2436679387607686076}
   m_Father: {fileID: 6442275240820431542}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8884919459696868176

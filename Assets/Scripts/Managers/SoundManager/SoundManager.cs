@@ -15,7 +15,14 @@ public class SoundManager : MonoBehaviour
         WeaponPickUp,
         WeaponDrop,
         MauserC96Shoot,
-        MauserC96Reload
+        MauserC96Reload,
+        Walking,
+        Running,
+        Jump,
+        Landing,
+        RunningBreathing,
+        WalkingBreathing,
+        IdleBreathing,
         // Add more sounds here
     }
     #endregion
@@ -174,7 +181,13 @@ public class SoundManager : MonoBehaviour
         }
         Destroy(oneShotAudioSource, audioClip.length);
     }
-
+    public static float GetSoundLenght(Sound sound)
+    {
+        AudioClip clip = GetAudioClip(sound);
+        if (clip == null) clip = GetAudioClipArray(sound)[0];
+        if (clip == null) return 0f;
+        return clip.length;
+    }
     public static void PlaySound(Sound sound, float volume = 1f)
     {
         GameObject oneShotGameObject = new GameObject("One Shot Sound");
@@ -298,7 +311,6 @@ public class SoundManager : MonoBehaviour
                 return soundAudioClip.audioClip;
             }
         }
-        Debug.LogError("Sound " + sound + " not found!");
         return null;
     }
 

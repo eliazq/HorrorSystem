@@ -5,6 +5,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public static Player Instance;
+
+    public FirstPersonController FirstPersonController { get; private set; }
     public WeaponHandling WeaponHandling { get; private set; }
     public Weapon Weapon { get { return WeaponHandling.Weapon; } }
 
@@ -14,6 +16,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         WeaponHandling = GetComponent<WeaponHandling>();
+        FirstPersonController = GetComponent<FirstPersonController>();
         Inventory = inventory;
         
         if (Instance == null)
