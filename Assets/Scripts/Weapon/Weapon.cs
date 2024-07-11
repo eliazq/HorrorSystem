@@ -95,7 +95,6 @@ public class Weapon : MonoBehaviour, IInteractable
         {
             realoadWeaponAmmo = reloadingWeaponsAmmo;
             animator.SetTrigger(ReloadTrigger);
-            animator.SetTrigger(shootTrigger); // After reloading shoot trigger would be on if not called here. it makes shoot anim after realoading if not this 
             StartCoroutine(SetReload());
             SoundManager.PlaySoundRandom(Data.reloadSound, transform.position, 0.4f);
         }
