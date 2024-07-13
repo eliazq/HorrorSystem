@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.16342133, g: 0.17727065, b: 0.19988936, a: 1}
+  m_IndirectSpecularColor: {r: 0.1634216, g: 0.17727107, b: 0.19988954, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5024,23 +5024,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c51fb0526fac52f44b65db7ec33069d5, type: 3}
   m_PrefabInstance: {fileID: 973777633}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &992536084 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6866968260120609243, guid: 29e7b922de7a1d6449736ad8173ab309, type: 3}
-  m_PrefabInstance: {fileID: 2948375592382465439}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &992536093
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 992536084}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7c067dcbea39724296aba7afc4c7fb3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1045135788
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9924,25 +9907,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7846144496781701704, guid: 5e423f7bdc037b34a84f9dcf0ded6857, type: 3}
   m_PrefabInstance: {fileID: 121890767}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2100058188 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 184106372504866783, guid: 29e7b922de7a1d6449736ad8173ab309, type: 3}
-  m_PrefabInstance: {fileID: 2948375592382465439}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2100058190
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2100058188}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4a4cb61f1649d84594ee4f3ba5500da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  smooth: 8
-  swayMultiplier: 2
 --- !u!1001 &2102690521
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10137,28 +10101,10 @@ PrefabInstance:
       propertyPath: interactKeyTextMeshProUGUI
       value: 
       objectReference: {fileID: 1120078887}
-    - target: {fileID: 8745036538728960347, guid: 29e7b922de7a1d6449736ad8173ab309, type: 3}
-      propertyPath: shakeAmount
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8745036538728960347, guid: 29e7b922de7a1d6449736ad8173ab309, type: 3}
-      propertyPath: shakeDuration
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8745036538728960347, guid: 29e7b922de7a1d6449736ad8173ab309, type: 3}
-      propertyPath: decreaseFactor
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6866968260120609243, guid: 29e7b922de7a1d6449736ad8173ab309, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 992536093}
-    - targetCorrespondingSourceObject: {fileID: 184106372504866783, guid: 29e7b922de7a1d6449736ad8173ab309, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2100058190}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29e7b922de7a1d6449736ad8173ab309, type: 3}
 --- !u!1001 &5143872467041676005
 PrefabInstance:

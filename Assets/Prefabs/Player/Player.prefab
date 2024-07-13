@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2436679387607686076}
+  - component: {fileID: 3206113551720249410}
   m_Layer: 0
   m_Name: HandHolder
   m_TagString: Untagged
@@ -32,6 +33,20 @@ Transform:
   - {fileID: 1735030261909837482}
   m_Father: {fileID: 3314474763378862573}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3206113551720249410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 184106372504866783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4a4cb61f1649d84594ee4f3ba5500da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smooth: 8
+  swayMultiplier: 2
 --- !u!1 &391448550608249117
 GameObject:
   m_ObjectHideFlags: 0
@@ -293,9 +308,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camTransform: {fileID: 6884328556309297661}
-  shakeDuration: 0.2
-  shakeAmount: 1.1
-  decreaseFactor: 1
+  shakeDuration: 0.3
+  shakeAmount: 0.3
+  decreaseFactor: 2
 --- !u!1 &4956397359936895974
 GameObject:
   m_ObjectHideFlags: 0
@@ -464,6 +479,7 @@ GameObject:
   - component: {fileID: 8545394819400007705}
   - component: {fileID: 1231384706437568455}
   - component: {fileID: 6896066537575754424}
+  - component: {fileID: 7424250291232641409}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -626,6 +642,18 @@ MonoBehaviour:
   crosshair: {fileID: 0}
   CrosshairFadeTime: 0.3
   HitmarkShowingTime: 0.1
+--- !u!114 &7424250291232641409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6866968260120609243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7c067dcbea39724296aba7afc4c7fb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7260361699533299116
 GameObject:
   m_ObjectHideFlags: 0

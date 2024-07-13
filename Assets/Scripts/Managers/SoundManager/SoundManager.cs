@@ -182,6 +182,11 @@ public class SoundManager : MonoBehaviour
         }
         Destroy(oneShotAudioSource, audioClip.length);
     }
+    public static bool IsSoundPlaying(Sound sound)
+    {
+        if (Instance.playingSounds.ContainsKey(sound)) return true;
+        return false;
+    }
     public static float GetSoundLenght(Sound sound)
     {
         AudioClip clip = GetAudioClip(sound);
@@ -225,7 +230,6 @@ public class SoundManager : MonoBehaviour
     }
     IEnumerator AddPlayingSoundCoroutine(AudioSource oneShotAudioSource, Sound sound)
     {
-        Debug.Log("Playing sound Added");
         playingSounds.Add(sound, oneShotAudioSource.gameObject);
         float timer = 0;
         bool soundHasStopped = false;
@@ -248,7 +252,6 @@ public class SoundManager : MonoBehaviour
     {
         if (Instance.playingSounds.TryGetValue(sound, out GameObject oneShotAudioSource))
         {
-            Debug.Log("Playing sound removed");
             Instance.playingSounds.Remove(sound);
             Destroy(oneShotAudioSource);
         }
