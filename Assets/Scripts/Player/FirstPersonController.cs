@@ -6,6 +6,8 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class FirstPersonController : MonoBehaviour
 {
+    #region Events
+
     public event EventHandler<OnJumpEventArgs> OnJump;
     public event EventHandler OnLanding;
     public class OnJumpEventArgs : EventArgs
@@ -13,6 +15,9 @@ public class FirstPersonController : MonoBehaviour
         public bool jumpForward;
         public bool jumpUp;
     }
+    #endregion
+
+    #region SerializeField References
 
     [Header("References")]
     [SerializeField] private Camera playerCamera;
@@ -20,6 +25,9 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField] private CharacterController characterController;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
+    #endregion
+
+    #region Settings
 
     [Header("Settings Camera")]
     [SerializeField] private float mouseSensitivity = 300f;
@@ -40,23 +48,25 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField] private float groundCheckRadius = 0.4f;
     [SerializeField] private float crouchingSpeed = 3f;
     private float jumpCooldown = 1f;
-    public Vector3 MoveDirection { get; private set; }
+
+    [Header("Settings Gravity")]
+    [SerializeField] private float gravity = -9.81f;
+    #endregion
+
+    #region Variables
+
+    Vector3 velocity;
     private float movementSpeed = 3f;
     Vector3 lastMoveDirection;
-    float crouchCheckYMax;
     float lastMovementSpeed;
-    float oldYScale;
-    float crouchYScale = 0.5f;
     float jumpTimer;
     bool isWalking;
+    #endregion
+
+    #region Properties
+    public Vector3 MoveDirection { get; private set; }
     public bool IsWalking { get { return isWalking && IsRunning == false; } }
-    public bool IsRunning 
-    {
-        get
-        {
-            return isWalking && movementSpeed > walkingSpeed;
-        }
-    }
+    public bool IsRunning { get { return movementSpeed > walkingSpeed; } }
     public bool IsFalling
     {
         get
@@ -66,16 +76,11 @@ public class FirstPersonController : MonoBehaviour
     }
     public bool IsLanding { get; private set; }
     public bool IsStanding { get { return velocity.x < 0.1 && velocity.z < 0.1f && IsGrounded; } }
-    float oldYRotation;
     public bool IsTurningLeft { get; private set;}
     public bool IsTurningRight { get; private set;}
-    public bool IsCrouching { get; private set; }
-
-    [Header("Settings Gravity")]
-    [SerializeField] private float gravity = -9.81f;
     public float Gravity { get { return gravity; } }
     public bool IsGrounded { get; private set; }
-    Vector3 velocity;
+    #endregion
 
     private void Start()
     {
@@ -97,8 +102,6 @@ public class FirstPersonController : MonoBehaviour
         }
         walkingFov = playerCamera.fieldOfView;
         runningFov = walkingFov + runningFovAmount;
-        oldYScale = transform.localScale.y;
-        crouchCheckYMax = characterController.height;
     }
 
     void Update()
@@ -240,21 +243,4 @@ public class FirstPersonController : MonoBehaviour
         }
     }
 
-    private void ScalePlayerToCrouchHeight()
-    {
-        Vector3 crouchScale = new Vector3(transform.localScale.x, crouchYScale, transform.localScale.z);
-        transform.localScale = Vector3.Lerp(transform.localScale, crouchScale, crouchingSpeed * Time.deltaTime);
-    }
-
-    private void ScalePlayerToStandingHeight()
-    {
-        // Check if can stand
-        if (Physics.SphereCast(transform.position, characterController.radius, transform.up, out RaycastHit hit, crouchCheckYMax))
-        {
-            return;
-        }
-        Vector3 standingScale = new Vector3(transform.localScale.x, oldYScale, transform.localScale.z);
-        transform.localScale = Vector3.Lerp(transform.localScale, standingScale, crouchingSpeed * Time.deltaTime);
-        characterController.Move(transform.up * Time.deltaTime);
-    }
 }
