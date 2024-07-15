@@ -94,8 +94,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9f32afaf3de6e34a88a106a4466a693, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Amount: 0.01
-  Frequency: 10
+  Amount: 0.015
+  Frequency: 11.5
   Smooth: 15
   LeanAmount: 2
   LeanTime: 3
@@ -654,6 +654,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7c067dcbea39724296aba7afc4c7fb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  walkingVolume: 0.2
+  runningVolume: 0.2
+  landingVolume: 0.1
 --- !u!1 &7260361699533299116
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,17 +4,27 @@ using UnityEngine;
 public class PlayerSounds : MonoBehaviour
 {
     FirstPersonController firstPersonController;
+    [SerializeField] float walkingVolume = 1f; // 1 = 100% of original volume
+    [SerializeField] float runningVolume = 1f;
+    [SerializeField] float landingVolume = 1f;
 
     private void Start()
     {
         firstPersonController = Player.Instance.FirstPersonController;
+        firstPersonController.OnLanding += FirstPersonController_OnLanding;
     }
+
+    private void FirstPersonController_OnLanding(object sender, System.EventArgs e)
+    {
+        SoundManager.PlaySound(SoundManager.Sound.Landing, landingVolume);
+    }
+
     private void Update()
     {
         if (firstPersonController.IsWalking)
         {
             if (!SoundManager.IsSoundPlaying(SoundManager.Sound.Walking))
-                SoundManager.PlaySound(SoundManager.Sound.Walking);
+                SoundManager.PlaySound(SoundManager.Sound.Walking, walkingVolume);
         }
         else
         {
@@ -27,7 +37,7 @@ public class PlayerSounds : MonoBehaviour
             if (SoundManager.IsSoundPlaying(SoundManager.Sound.Running)) return;
             else
             {
-                SoundManager.PlaySound(SoundManager.Sound.Running);
+                SoundManager.PlaySound(SoundManager.Sound.Running, runningVolume);
             }
 
         }
@@ -35,7 +45,6 @@ public class PlayerSounds : MonoBehaviour
         {
             if (SoundManager.IsSoundPlaying(SoundManager.Sound.Running)) 
                 SoundManager.StopPlayingSound(SoundManager.Sound.Running);
-
         }
         
     }

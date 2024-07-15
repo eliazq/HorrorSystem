@@ -7,6 +7,7 @@ using UnityEngine;
 public class FirstPersonController : MonoBehaviour
 {
     public event EventHandler<OnJumpEventArgs> OnJump;
+    public event EventHandler OnLanding;
     public class OnJumpEventArgs : EventArgs
     {
         public bool jumpForward;
@@ -172,7 +173,11 @@ public class FirstPersonController : MonoBehaviour
 
     private void AddGravity()
     {
+        bool lastGroundedCheck = IsGrounded;
+
         IsGrounded = Physics.CheckSphere(groundCheck.position, groundCheckRadius, groundLayer);
+
+        if (IsGrounded && lastGroundedCheck != IsGrounded) OnLanding?.Invoke(this,EventArgs.Empty);
 
         if (IsGrounded && velocity.y < 0)
         { 
