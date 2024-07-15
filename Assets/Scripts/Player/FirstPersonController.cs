@@ -46,7 +46,6 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField] private float runningSpeed = 4f;
     [SerializeField] private float jumpHeight = 1.6f;
     [SerializeField] private float groundCheckRadius = 0.4f;
-    [SerializeField] private float crouchingSpeed = 3f;
     private float jumpCooldown = 1f;
 
     [Header("Settings Gravity")]
@@ -66,7 +65,7 @@ public class FirstPersonController : MonoBehaviour
     #region Properties
     public Vector3 MoveDirection { get; private set; }
     public bool IsWalking { get { return isWalking && IsRunning == false; } }
-    public bool IsRunning { get { return movementSpeed > walkingSpeed; } }
+    public bool IsRunning { get { return isWalking && movementSpeed > walkingSpeed; } }
     public bool IsFalling
     {
         get
