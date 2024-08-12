@@ -11,20 +11,6 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] public static Sprite emptyInventoryIcon;
     private List<ItemSlot> itemSlots = new List<ItemSlot>();
     public bool isVisible { get { return inventoryUI.activeSelf; } }
-    [SerializeField] private GameObject selectedItemSlot;
-    private GameObject SelectedItemSlot
-    {
-        get
-        {
-            return selectedItemSlot;
-        }
-        set
-        {
-            if (selectedItemSlot != null) selectedItemSlot.GetComponent<ItemSlot>().HideSelectedVisual();
-            selectedItemSlot = value;
-            selectedItemSlot.GetComponent<ItemSlot>().ShowSelectedVisual();
-        }
-    }
 
     private int currentIndex = 0;
 
@@ -45,11 +31,29 @@ public class InventoryUI : MonoBehaviour
         ControllerManager.OnControllerDeviceChanged += Instance_OnUsingDeviceChanged;
 
         emptyInventoryIcon = itemSlots[0].itemSprite;
+
+        ItemSlot.OnAnyItemSlotSelected += ItemSlot_OnAnyItemSlotSelected;
+    }
+
+    private void ItemSlot_OnAnyItemSlotSelected(object sender, EventArgs e)
+    {
+        // Ensure the sender is a valid ItemSlot
+        if (sender is not ItemSlot selectedItemSlot) return;
+
+        foreach (ItemSlot itemSlot in itemSlots)
+        {
+            // Deselect all item slots except the one that triggered the event
+            if (itemSlot.Selected && itemSlot != selectedItemSlot)
+            {
+                ItemSlot.DeSelect(itemSlot);
+            }
+        }
     }
 
     private void OnDestroy()
     {
         ControllerManager.OnControllerDeviceChanged -= Instance_OnUsingDeviceChanged;
+        ItemSlot.OnAnyItemSlotSelected -= ItemSlot_OnAnyItemSlotSelected;
     }
 
     private void Instance_OnUsingDeviceChanged(object sender, EventArgs e)
@@ -70,7 +74,7 @@ public class InventoryUI : MonoBehaviour
     {
         if (!isVisible) return;
 
-        if (SelectedItemSlot.TryGetComponent(out ItemSlot itemSlot) && itemSlot.hasItem)
+        if (EventSystem.current.TryGetComponent(out ItemSlot itemSlot) && itemSlot.hasItem)
         {
             Player.Instance.Inventory.DropItem(itemSlot.item);
         }
@@ -110,7 +114,7 @@ public class InventoryUI : MonoBehaviour
         
         // INVENTORY VISIBLE
         EventSystem.current.SetSelectedGameObject(itemSlots[currentIndex].gameObject);
-        SelectedItemSlot = EventSystem.current.currentSelectedGameObject;
+        ItemSlot.Select(EventSystem.current.currentSelectedGameObject.GetComponent<ItemSlot>());
 
         InputManager.Instance.WeaponHandlingInputsActive = false;
         
@@ -159,14 +163,14 @@ public class InventoryUI : MonoBehaviour
     {
         currentIndex = (currentIndex + 1) % itemSlots.Count;
         EventSystem.current.SetSelectedGameObject(itemSlots[currentIndex].gameObject);
-        SelectedItemSlot = EventSystem.current.currentSelectedGameObject;
+        ItemSlot.Select(EventSystem.current.currentSelectedGameObject.GetComponent<ItemSlot>());
     }
 
     private void SelectPreviousItem()
     {
         currentIndex = (currentIndex - 1 + itemSlots.Count) % itemSlots.Count;
         EventSystem.current.SetSelectedGameObject(itemSlots[currentIndex].gameObject);
-        SelectedItemSlot = EventSystem.current.currentSelectedGameObject;
+        ItemSlot.Select(EventSystem.current.currentSelectedGameObject.GetComponent<ItemSlot>());
     }
 
 }

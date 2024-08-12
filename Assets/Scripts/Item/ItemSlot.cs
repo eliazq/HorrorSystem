@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -6,11 +7,13 @@ using UnityEngine.UI;
 
 public class ItemSlot : MonoBehaviour
 {
+    public static event EventHandler OnAnyItemSlotSelected;
     [SerializeField] private TextMeshProUGUI itemAmountText;
     [SerializeField] private Image itemIcon;
     Item slotItem;
     [SerializeField] private Button itemRemoveButton;
     [SerializeField] private GameObject selectedVisual;
+    public bool Selected { get; private set; }
     public Sprite itemSprite { get { return itemIcon.sprite; } }
     public Button removeButton { get; private set; }
     public Item item { 
@@ -48,11 +51,23 @@ public class ItemSlot : MonoBehaviour
         itemAmountText.text = "0";
     }
 
-    public void HideSelectedVisual()
+    private void HideSelectedVisual()
     {
         selectedVisual.SetActive(false);
     }
-    public void ShowSelectedVisual()
+    public static void Select(ItemSlot itemSlot)
+    {
+        itemSlot.Selected = true;
+        itemSlot.ShowSelectedVisual();
+        OnAnyItemSlotSelected?.Invoke(itemSlot, EventArgs.Empty);
+    }
+
+    public static void DeSelect(ItemSlot itemSlot)
+    {
+        itemSlot.Selected = false;
+        itemSlot.HideSelectedVisual();
+    }
+    private void ShowSelectedVisual()
     {
         selectedVisual.SetActive(true);
     }
