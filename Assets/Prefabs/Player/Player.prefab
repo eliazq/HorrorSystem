@@ -478,7 +478,6 @@ GameObject:
   - component: {fileID: 7191160807959969133}
   - component: {fileID: 8545394819400007705}
   - component: {fileID: 1231384706437568455}
-  - component: {fileID: 6896066537575754424}
   - component: {fileID: 7424250291232641409}
   m_Layer: 7
   m_Name: Player
@@ -624,22 +623,6 @@ MonoBehaviour:
   twoBoneIKConstraint: {fileID: 2510868905990613305}
   rigBuilder: {fileID: 5007190453521778280}
   emptyHandTransform: {fileID: 5306748758153426357}
---- !u!114 &6896066537575754424
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6866968260120609243}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bbc78d10bb547d34d88cc1b7c67967dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hitMarkUI: {fileID: 0}
-  crosshair: {fileID: 0}
-  CrosshairFadeTime: 0.3
-  HitmarkShowingTime: 0.1
 --- !u!114 &7424250291232641409
 MonoBehaviour:
   m_ObjectHideFlags: 0

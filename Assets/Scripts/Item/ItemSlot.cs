@@ -13,6 +13,7 @@ public class ItemSlot : MonoBehaviour
     Item slotItem;
     [SerializeField] private Button itemRemoveButton;
     [SerializeField] private GameObject selectedVisual;
+    [SerializeField] private GameObject equipButton;
     public bool Selected { get; private set; }
     public Sprite itemSprite { get { return itemIcon.sprite; } }
     public Button removeButton { get; private set; }
@@ -59,6 +60,7 @@ public class ItemSlot : MonoBehaviour
     {
         itemSlot.Selected = true;
         itemSlot.ShowSelectedVisual();
+        if (itemSlot.item is IEquippable) itemSlot.equipButton.SetActive(true);
         OnAnyItemSlotSelected?.Invoke(itemSlot, EventArgs.Empty);
     }
 
@@ -66,9 +68,15 @@ public class ItemSlot : MonoBehaviour
     {
         itemSlot.Selected = false;
         itemSlot.HideSelectedVisual();
+        if (itemSlot.equipButton.activeSelf) itemSlot.equipButton.SetActive(false);
     }
     private void ShowSelectedVisual()
     {
         selectedVisual.SetActive(true);
+    }
+
+    public void TryEquipItem()
+    {
+        if (item is IEquippable) item.GetComponent<IEquippable>().Equip();
     }
 }
