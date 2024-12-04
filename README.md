@@ -45,7 +45,4 @@
     <li>Ensure all necessary packages are installed via the Package Manager.</li>
 </ol>
 
-<h3>Usage</h3>
-<h5>TODO</h5>
-
 <p>Enjoy The Horror System</p>
