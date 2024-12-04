@@ -4,7 +4,6 @@
   The system is packed with features and tools to streamline the development process, 
   ensuring you can focus on crafting a terrifying experience for your players.</p>
 
-<img src="">
 
 <h2>Features</h2>
 
