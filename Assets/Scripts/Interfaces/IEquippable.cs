@@ -4,5 +4,6 @@ using UnityEngine;
 
 public interface IEquippable
 {
+    bool IsEquipped { get; set; }
     void Equip();
 }

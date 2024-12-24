@@ -10,6 +10,6 @@ public class Key : Item
     }
     public override void OnInteract(Transform interactorTransform)
     {
-        interactorTransform.GetComponent<Player>().Inventory.AddItem(this);
+        Player.Instance.Inventory.AddItem(this);
     }
 }
