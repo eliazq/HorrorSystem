@@ -4,7 +4,6 @@
   The system is packed with features and tools to streamline the development process, 
   ensuring you can focus on crafting a terrifying experience for your players.</p>
 
-<img src="">
 
 <h2>Features</h2>
 
@@ -44,8 +43,5 @@
     <li>Open the project in Unity.</li>
     <li>Ensure all necessary packages are installed via the Package Manager.</li>
 </ol>
-
-<h3>Usage</h3>
-<h5>TODO</h5>
 
 <p>Enjoy The Horror System</p>
