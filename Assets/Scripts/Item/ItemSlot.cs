@@ -42,7 +42,17 @@ public class ItemSlot : MonoBehaviour
         itemRemoveButton.onClick.AddListener(() =>
         {
             if (hasItem)
+            {
+                // UnEquip if is equipped
+                IUnEquippable itemIUnEquippable = item as IUnEquippable;
+                IEquippable itemIEquippable = item as IEquippable;
+                if (itemIUnEquippable != null && itemIEquippable.IsEquipped)
+                {
+                    itemIUnEquippable.UnEquip();
+                }
                 Player.Instance.Inventory.DropItem(slotItem);
+            }
+
         });
     }
 

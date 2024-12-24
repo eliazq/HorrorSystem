@@ -2192,11 +2192,6 @@ Transform:
   - {fileID: 247875681}
   m_Father: {fileID: 1884308071}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &639546373 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3314474763378862573, guid: 29e7b922de7a1d6449736ad8173ab309, type: 3}
-  m_PrefabInstance: {fileID: 2948375592382465439}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &640575289
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3702,6 +3697,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &982748431 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6884328556309297661, guid: 29e7b922de7a1d6449736ad8173ab309, type: 3}
+  m_PrefabInstance: {fileID: 2948375592382465439}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1003984687
 GameObject:
   m_ObjectHideFlags: 0
@@ -8287,11 +8287,11 @@ Transform:
   m_GameObject: {fileID: 2107241341}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.1059, y: -0.2687, z: -0.1703}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 639546373}
+  m_Father: {fileID: 982748431}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2127682596
 PrefabInstance:
@@ -8358,6 +8358,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5745333828314399384, guid: 89a7676fd368d404ab057cb7fcb6d12a, type: 3}
+      propertyPath: m_Intensity
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5796519492953604763, guid: 89a7676fd368d404ab057cb7fcb6d12a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6421101022419450216, guid: 89a7676fd368d404ab057cb7fcb6d12a, type: 3}
       propertyPath: m_Name
       value: Flashlight
@@ -8463,6 +8471,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 166547018453130861, guid: 29e7b922de7a1d6449736ad8173ab309, type: 3}
+      propertyPath: flashLightHoldingTransform
+      value: 
+      objectReference: {fileID: 2107241342}
     - target: {fileID: 655064570098639361, guid: 29e7b922de7a1d6449736ad8173ab309, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -8530,7 +8542,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 3314474763378862573, guid: 29e7b922de7a1d6449736ad8173ab309, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 6884328556309297661, guid: 29e7b922de7a1d6449736ad8173ab309, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2107241342}
     m_AddedComponents: []

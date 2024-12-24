@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
     [SerializeField] private Inventory inventory;
     public Inventory Inventory { get; private set; }
 
+    public Transform flashLightHoldingTransform;
+
     private void Awake()
     {
         WeaponHandling = GetComponent<WeaponHandling>();
