@@ -12,7 +12,19 @@ public class PlayerInteractUI : MonoBehaviour {
 
     private void Update() {
         if (playerInteract.GetInteractableObject() != null) {
-            Show(playerInteract.GetInteractableObject());
+
+            if (playerInteract.GetInteractableObject().GetTransform().TryGetComponent(out Item item))
+            {
+                // if interactable item is not in player inventory show interact text 
+                if (!Player.Instance.Inventory.HasItem(item))
+                {
+                    Show(playerInteract.GetInteractableObject());
+                }
+            }
+            else
+            {
+                Show(playerInteract.GetInteractableObject());
+            }
 
             // If interactable object is the same weapon as the one player is holding, dont show Interact text
             if (playerInteract.GetInteractableObject().GetTransform().TryGetComponent(out Weapon weapon)){

@@ -26,12 +26,6 @@ public class PlayerInteract : MonoBehaviour {
         }
     }
 
-    private void Update() {
-        if (Input.GetKeyDown(KeyCode.E)) {
-
-        }
-    }
-
     public IInteractable GetInteractableObject() {
         List<IInteractable> interactableList = new List<IInteractable>();
         float interactRange = 1.8f;

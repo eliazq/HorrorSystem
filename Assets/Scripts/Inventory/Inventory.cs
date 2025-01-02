@@ -106,6 +106,12 @@ public class Inventory : MonoBehaviour
         return false;
     }
 
+    public bool HasItem(Item itemToCheck)
+    {
+        if (items.Contains(itemToCheck)) return true;
+        return false;
+    }
+
     public void DestroyItem(Item item)
     {
         bool removeItemFromList = true;
@@ -136,7 +142,7 @@ public class Inventory : MonoBehaviour
         item.transform.SetParent(null);
         item.gameObject.SetActive(true);
         if (item.GetComponent<Rigidbody>() == null)
-            item.AddComponent<Rigidbody>();
+            item.AddComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.Continuous;
         DisablePhysicsFromObject(item.gameObject, 3f);
         if (removeItemFromList)
             items.Remove(item);
