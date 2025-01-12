@@ -7,7 +7,7 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     public event EventHandler OnInventoryChanged;
-    private const int size = 8;
+    private const int size = 12;
     List<Item> items = new List<Item>(size);
 
     public int ItemCount()
@@ -38,7 +38,7 @@ public class Inventory : MonoBehaviour
         {
             if (i.Data.itemName == item.Data.itemName)
             {
-                i.Amount++;
+                i.Amount += item.Amount;
                 Destroy(item.gameObject);
                 OnInventoryChanged?.Invoke(this, EventArgs.Empty);
                 return true;
@@ -54,7 +54,7 @@ public class Inventory : MonoBehaviour
             Debug.LogWarning("Tried to add item to inventory that was already in inventory");
             return false;
         };
-        if (items.Count > 8)
+        if (items.Count > size)
         {
             Debug.LogWarning("Not enough space in inventroy");
             return false;
@@ -110,6 +110,31 @@ public class Inventory : MonoBehaviour
     {
         if (items.Contains(itemToCheck)) return true;
         return false;
+    }
+
+    public bool HasItem(string itemName)
+    {
+        foreach (Item item in items)
+        {
+            if (item.Data.itemName == itemName)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public bool HasItemOfType(Type type)
+    {
+         // Check if any item in the collection is of the specified type
+        foreach (var item in items)
+        {
+            if (item.GetType() == type) 
+            {
+                return true;
+            }
+        }
+        return false; // No item of the specified type found
     }
 
     public void DestroyItem(Item item)

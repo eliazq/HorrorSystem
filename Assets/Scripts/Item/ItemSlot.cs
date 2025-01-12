@@ -69,6 +69,8 @@ public class ItemSlot : MonoBehaviour
     }
     public static void Select(ItemSlot itemSlot)
     {
+        if (!itemSlot.hasItem) return;
+
         itemSlot.Selected = true;
         itemSlot.ShowSelectedVisual();
 
