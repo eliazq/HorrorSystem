@@ -1,0 +1,134 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4476562045172213733
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7023081359574529950}
+  - component: {fileID: 2580191959079167545}
+  - component: {fileID: 4891348314844280581}
+  m_Layer: 0
+  m_Name: Bandage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7023081359574529950
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4476562045172213733}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8767435423487675883}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2580191959079167545
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4476562045172213733}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.19228637, y: 0.039932847, z: 0.36479533}
+  m_Center: {x: -0.0012388825, y: 0, z: 0.02192229}
+--- !u!114 &4891348314844280581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4476562045172213733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcef843c9126e124c8ca72b129f82ffe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Data: {fileID: 11400000, guid: 666fd22dc1812a14cb0f403421c029dc, type: 2}
+  interactText: Pick Up Bandage
+  healthBonus: 10
+--- !u!1001 &1459507534681029630
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7023081359574529950}
+    m_Modifications:
+    - target: {fileID: 599102807783107953, guid: 450231294a87b3c4c8b333f7fa1f094b, type: 3}
+      propertyPath: m_Name
+      value: Bandage_Visual
+      objectReference: {fileID: 0}
+    - target: {fileID: 7920994253562705429, guid: 450231294a87b3c4c8b333f7fa1f094b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7920994253562705429, guid: 450231294a87b3c4c8b333f7fa1f094b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 7920994253562705429, guid: 450231294a87b3c4c8b333f7fa1f094b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7920994253562705429, guid: 450231294a87b3c4c8b333f7fa1f094b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7920994253562705429, guid: 450231294a87b3c4c8b333f7fa1f094b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7920994253562705429, guid: 450231294a87b3c4c8b333f7fa1f094b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.00000036891862
+      objectReference: {fileID: 0}
+    - target: {fileID: 7920994253562705429, guid: 450231294a87b3c4c8b333f7fa1f094b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.00000029773636
+      objectReference: {fileID: 0}
+    - target: {fileID: 7920994253562705429, guid: 450231294a87b3c4c8b333f7fa1f094b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7920994253562705429, guid: 450231294a87b3c4c8b333f7fa1f094b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7920994253562705429, guid: 450231294a87b3c4c8b333f7fa1f094b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 450231294a87b3c4c8b333f7fa1f094b, type: 3}
+--- !u!4 &8767435423487675883 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7920994253562705429, guid: 450231294a87b3c4c8b333f7fa1f094b, type: 3}
+  m_PrefabInstance: {fileID: 1459507534681029630}
+  m_PrefabAsset: {fileID: 0}
